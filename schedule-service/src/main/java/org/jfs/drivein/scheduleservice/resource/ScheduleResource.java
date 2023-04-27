@@ -1,17 +1,15 @@
 package org.jfs.drivein.scheduleservice.resource;
 
-import java.util.Date;
-
 import org.jfs.drivein.scheduleservice.exception.InvalidScheduleDateException;
 import org.jfs.drivein.scheduleservice.model.Schedule;
 import org.jfs.drivein.scheduleservice.service.ScheduleCrudService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.service.annotation.PutExchange;
 
 @RestController
 public class ScheduleResource {
@@ -28,17 +26,18 @@ public class ScheduleResource {
 	}
 
 	@GetMapping("view/{date}")
-	public Schedule viewSchedule(@RequestParam Date date) throws InvalidScheduleDateException {
+	public Schedule viewSchedule(@PathVariable String date) throws InvalidScheduleDateException {
 		return crudService.viewSchedule(date);
 	}
 
-	@PutExchange("update/{date}")
-	public Schedule updateSchedule(Date date, Schedule schedule) throws InvalidScheduleDateException {
+	@PutMapping("update/{date}")
+	public Schedule updateSchedule(@PathVariable String date, @RequestBody Schedule schedule)
+			throws InvalidScheduleDateException {
 		return crudService.updateSchedule(date, schedule);
 	}
 
 	@DeleteMapping("delete/{date}")
-	public void deleteSchedule(@RequestBody Date date) {
+	public void deleteSchedule(@PathVariable String date) {
 		crudService.deleteSchedule(date);
 	}
 }

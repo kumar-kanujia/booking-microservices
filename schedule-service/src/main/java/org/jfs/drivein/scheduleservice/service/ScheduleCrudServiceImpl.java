@@ -1,6 +1,5 @@
 package org.jfs.drivein.scheduleservice.service;
 
-import java.util.Date;
 import java.util.Optional;
 
 import org.jfs.drivein.scheduleservice.dao.ScheduleDao;
@@ -24,7 +23,7 @@ public class ScheduleCrudServiceImpl implements ScheduleCrudService {
 	}
 
 	@Override
-	public Schedule updateSchedule(Date date, Schedule schedule) throws InvalidScheduleDateException {
+	public Schedule updateSchedule(String date, Schedule schedule) throws InvalidScheduleDateException {
 		// TODO Auto-generated method stub
 		Optional<Schedule> optional = dao.viewSchedule(date);
 		if (optional.isEmpty()) {
@@ -36,14 +35,14 @@ public class ScheduleCrudServiceImpl implements ScheduleCrudService {
 	}
 
 	@Override
-	public void deleteSchedule(Date date) {
+	public void deleteSchedule(String date) {
 		// TODO Auto-generated method stub
 
 		dao.deleteSchedule(dao.viewSchedule(date).get());
 	}
 
 	@Override
-	public Schedule viewSchedule(Date date) throws InvalidScheduleDateException {
+	public Schedule viewSchedule(String date) throws InvalidScheduleDateException {
 		// TODO Auto-generated method stub
 		Optional<Schedule> optional = dao.viewSchedule(date);
 		if (optional.isEmpty()) {

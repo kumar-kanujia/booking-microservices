@@ -1,7 +1,5 @@
 package org.jfs.drivein.scheduleservice.model;
 
-import java.util.Date;
-
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -15,7 +13,7 @@ import lombok.Setter;
 public class Schedule {
 
     private String id;
-    private Date date;
+	private String date;
     private ScheduleMovie slot1;
     private ScheduleMovie slot2;
     private ScheduleMovie slot3;

@@ -1,6 +1,5 @@
 package org.jfs.drivein.scheduleservice.dao;
 
-import java.util.Date;
 import java.util.Optional;
 
 import org.jfs.drivein.scheduleservice.model.Schedule;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScheduleDaoImpl implements ScheduleDao {
 
-	private ScheduleRepository repository;
+	private final ScheduleRepository repository;
 
 	public ScheduleDaoImpl(ScheduleRepository repository) {
 		this.repository = repository;
@@ -22,7 +21,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
 	}
 
 	@Override
-	public Optional<Schedule> viewSchedule(Date date) {
+	public Optional<Schedule> viewSchedule(String date) {
 		return repository.findByDate(date);
 	}
 
