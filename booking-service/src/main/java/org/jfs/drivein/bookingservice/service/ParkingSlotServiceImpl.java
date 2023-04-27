@@ -3,7 +3,7 @@ package org.jfs.drivein.bookingservice.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.jfs.drivein.bookingservice.NoSlotException;
+import org.jfs.drivein.bookingservice.exception.NoSlotException;
 import org.jfs.drivein.bookingservice.dao.ParkingSlotDao;
 import org.jfs.drivein.bookingservice.model.ParkingSlot;
 import org.jfs.drivein.bookingservice.proxy.ScheduleProxy;
