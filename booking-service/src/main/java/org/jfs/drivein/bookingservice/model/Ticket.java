@@ -14,11 +14,11 @@ import java.util.Date;
 @ToString
 public class Ticket {
     @Id
-    private int id;
+    private String id;
     private String carNumber;
-    private String movieTitle;
-    private Date movieDate;
+    private String title;
+    private Date date;
     private String slotTime;
-    private String slotNumber;
+    private String parkingSlotNumber;
     private double price;
 }
