@@ -51,7 +51,7 @@ booking ::
 
 config-server ::
 	profile : native
-	port = 6777
+	port = 7288
 	usiing github
 
 
