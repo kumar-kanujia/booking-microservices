@@ -7,7 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /*
-author kumar-kanujia
+author kumar- 1.0.0
  */
 
 @Document

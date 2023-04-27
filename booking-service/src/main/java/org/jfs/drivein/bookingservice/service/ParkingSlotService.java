@@ -7,7 +7,7 @@ import org.jfs.drivein.bookingservice.model.ParkingSlot;
 import java.util.List;
 
 /*
-author kumar-kanujia
+author kumar- 1.0.0
  */
 
 public interface ParkingSlotService {
