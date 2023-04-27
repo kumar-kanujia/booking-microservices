@@ -49,4 +49,11 @@ booking ::
 
 
 
+config-server ::
+	profile : native
+	port = 6777
+	usiing github
+
+
+
 
