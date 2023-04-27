@@ -15,7 +15,6 @@ public class MovieController {
 
     @PostMapping("save")
     public Movie saveMovie(@RequestBody Movie movie){
-        System.out.println(movie);
         return movieService.saveMovie(movie);
     }
 }

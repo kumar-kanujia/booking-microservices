@@ -1,18 +1,16 @@
 package org.jfs.drivein.catalogservice.service;
 
+import java.util.List;
+
 import org.jfs.drivein.catalogservice.dao.MovieDao;
 import org.jfs.drivein.catalogservice.model.Movie;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class MovieServiceImpl implements MovieService{
 
     private MovieDao movieDao;
 
-    @Autowired
     public MovieServiceImpl(MovieDao movieDao) {
         this.movieDao = movieDao;
     }
