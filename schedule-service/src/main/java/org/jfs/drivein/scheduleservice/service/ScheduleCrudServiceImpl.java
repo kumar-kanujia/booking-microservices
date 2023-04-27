@@ -5,48 +5,60 @@ import java.util.Optional;
 import org.jfs.drivein.scheduleservice.dao.ScheduleDao;
 import org.jfs.drivein.scheduleservice.exception.InvalidScheduleDateException;
 import org.jfs.drivein.scheduleservice.model.Schedule;
-import org.springframework.stereotype.Component;
+import org.jfs.drivein.scheduleservice.proxy.BookingProxy;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class ScheduleCrudServiceImpl implements ScheduleCrudService {
 
-	private ScheduleDao dao;
+	private final ScheduleDao scheduleDao;
 
-	public ScheduleCrudServiceImpl(ScheduleDao dao) {
-		this.dao = dao;
+	private final BookingProxy bookingProxy;
+
+	public ScheduleCrudServiceImpl(ScheduleDao dao, BookingProxy bookingProxy) {
+		this.scheduleDao = dao;
+		this.bookingProxy = bookingProxy;
 	}
 
 	@Override
 	public Schedule addSchedule(Schedule schedule) {
-		// TODO Auto-generated method stub
-		return dao.saveSchedule(schedule);
+		bookingProxy.createSlot(schedule.getSlot1().getTitle(), schedule.getDate(), "A");
+		bookingProxy.createSlot(schedule.getSlot2().getTitle(), schedule.getDate(), "B");
+		bookingProxy.createSlot(schedule.getSlot3().getTitle(), schedule.getDate(), "C");
+		return scheduleDao.saveSchedule(schedule);
 	}
 
 	@Override
 	public Schedule updateSchedule(String date, Schedule schedule) throws InvalidScheduleDateException {
-		// TODO Auto-generated method stub
-		Optional<Schedule> optional = dao.viewSchedule(date);
+		Optional<Schedule> optional = scheduleDao.viewSchedule(date);
 		if (optional.isEmpty()) {
-			throw new InvalidScheduleDateException();
+			throw new InvalidScheduleDateException("Please enter valid date");
 		}
+		bookingProxy.updateSlot(schedule.getSlot1().getTitle(), schedule.getDate(), "A");
+		bookingProxy.updateSlot(schedule.getSlot2().getTitle(), schedule.getDate(), "B");
+		bookingProxy.updateSlot(schedule.getSlot3().getTitle(), schedule.getDate(), "C");
 		schedule.setId(optional.get().getId());
 		schedule.setDate(date);
-		return dao.saveSchedule(schedule);
+		return scheduleDao.saveSchedule(schedule);
 	}
 
 	@Override
-	public void deleteSchedule(String date) {
-		// TODO Auto-generated method stub
-
-		dao.deleteSchedule(dao.viewSchedule(date).get());
+	public void deleteSchedule(String date) throws InvalidScheduleDateException {
+		Schedule schedule = scheduleDao.viewSchedule(date).orElse(null);
+		if (schedule == null) {
+			throw new InvalidScheduleDateException("");
+		}
+		bookingProxy.deleteSlot(schedule.getSlot1().getTitle(), schedule.getDate(), "A");
+		bookingProxy.deleteSlot(schedule.getSlot2().getTitle(), schedule.getDate(), "B");
+		bookingProxy.deleteSlot(schedule.getSlot3().getTitle(), schedule.getDate(), "C");
+		scheduleDao.deleteSchedule(schedule);
 	}
 
 	@Override
 	public Schedule viewSchedule(String date) throws InvalidScheduleDateException {
-		// TODO Auto-generated method stub
-		Optional<Schedule> optional = dao.viewSchedule(date);
+		Optional<Schedule> optional = scheduleDao.viewSchedule(date);
 		if (optional.isEmpty()) {
-			throw new InvalidScheduleDateException();
+			throw new InvalidScheduleDateException("Please enter valid date");
 		}
 		return optional.get();
 	}
