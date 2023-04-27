@@ -1,15 +1,18 @@
 package org.jfs.drivein.bookingservice.service;
 
-import java.util.Optional;
-
 import org.jfs.drivein.bookingservice.exception.TicketNotFoundException;
+import org.jfs.drivein.bookingservice.exception.UnavailableSlotException;
 import org.jfs.drivein.bookingservice.model.Ticket;
+
+/*
+author kumar-kanujia
+ */
 
 public interface TicketService {
 
-	Ticket bookTicket(Ticket ticket);
-
 	void cancelTicket(String id);
 
-	Optional<Ticket> viewTicket(String id) throws TicketNotFoundException;
+	Ticket viewTicket(String id) throws TicketNotFoundException;
+
+	Ticket bookTicket(String slotId, String carNumber, String section) throws UnavailableSlotException;
 }

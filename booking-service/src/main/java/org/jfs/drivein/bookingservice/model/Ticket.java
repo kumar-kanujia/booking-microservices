@@ -1,13 +1,13 @@
 package org.jfs.drivein.bookingservice.model;
 
 
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+/*
+author kumar-kanujia
+ */
 
 @Document
 @Getter
@@ -22,6 +22,11 @@ public class Ticket {
     private String title;
 	private String date;
     private String slotTime;
-    private String parkingSlotNumber;
+    private String parkingSection;
+    private String tier;
+    private int seatNo;
     private double price;
+
+    public Ticket() {
+    }
 }

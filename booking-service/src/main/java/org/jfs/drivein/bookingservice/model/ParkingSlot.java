@@ -22,17 +22,17 @@ public class ParkingSlot {
 	private String title;
 	private String date;
     private String slotTime;
-    private int typeA;
-    private int typeB;
-    private int typeC;
+    private int frontSection;
+    private int middleSection;
+    private int backSection;
 
-	public ParkingSlot(String title, String date, String slotTime, int typeA, int typeB, int typeC) {
+	public ParkingSlot(String title, String date, String slotTime, int frontSection, int middleSection, int backSection) {
 		this.title = title;
 		this.date = date;
 		this.slotTime = slotTime;
-		this.typeA = typeA;
-		this.typeB = typeB;
-		this.typeC = typeC;
+		this.frontSection = frontSection;
+		this.middleSection = middleSection;
+		this.backSection = backSection;
 	}
 
 }
