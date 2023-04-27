@@ -9,7 +9,7 @@ public interface ScheduleCrudService {
 
 	Schedule updateSchedule(String date, Schedule schedule) throws InvalidScheduleDateException;
 
-	void deleteSchedule(String date);
+	void deleteSchedule(String date) throws InvalidScheduleDateException;
 
 	Schedule viewSchedule(String date) throws InvalidScheduleDateException;
 }
