@@ -10,9 +10,9 @@ author kumar-kanujia
 
 public interface TicketService {
 
-	void cancelTicket(String id) throws TicketNotFoundException;
+	void cancelTicket(String id);
 
 	Ticket viewTicket(String id) throws TicketNotFoundException;
 
-	Ticket bookTicket(String slotId, String carNumber, String tier) throws UnavailableSlotException;
+	Ticket bookTicket(String slotId, String carNumber, String section) throws UnavailableSlotException;
 }

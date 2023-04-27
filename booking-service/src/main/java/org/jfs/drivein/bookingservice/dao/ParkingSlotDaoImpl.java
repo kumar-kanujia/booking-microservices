@@ -11,7 +11,6 @@ import java.util.Optional;
 /*
 author kumar-kanujia mujain
  */
-
 @Repository
 @AllArgsConstructor
 public class ParkingSlotDaoImpl implements ParkingSlotDao {
