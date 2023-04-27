@@ -8,7 +8,6 @@ import java.util.Optional;
 /*
 author mujain 1.0.0
  */
-
 public interface ParkingSlotDao {
 
 	void saveParkingSlot(ParkingSlot parkingSlot);

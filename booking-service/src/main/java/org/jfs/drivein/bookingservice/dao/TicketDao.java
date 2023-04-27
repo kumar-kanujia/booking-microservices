@@ -7,7 +7,6 @@ import java.util.Optional;
 /*
 author kumar- 1.0.0
  */
-
 public interface TicketDao {
 
 	Ticket saveTicket(Ticket ticket);

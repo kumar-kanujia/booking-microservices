@@ -6,6 +6,7 @@ import org.jfs.drivein.bookingservice.exception.UnavailableSlotException;
 import org.jfs.drivein.bookingservice.exception.UnavailableTitleException;
 import org.jfs.drivein.bookingservice.model.ParkingSlot;
 import org.jfs.drivein.bookingservice.model.Ticket;
+import org.jfs.drivein.bookingservice.proxy.ScheduleProxy;
 import org.jfs.drivein.bookingservice.service.ParkingSlotService;
 import org.jfs.drivein.bookingservice.service.TicketService;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,7 @@ public class BookingResource {
     private final ParkingSlotService parkingSlotService;
 
     private final TicketService ticketService;
+
 
 
     @GetMapping(value="view", params = "title")

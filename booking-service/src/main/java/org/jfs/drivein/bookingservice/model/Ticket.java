@@ -22,6 +22,7 @@ public class Ticket {
     private String title;
 	private String date;
     private String slotTime;
+    private String parkingSection;
     private String tier;
     private int seatNo;
     private double price;
