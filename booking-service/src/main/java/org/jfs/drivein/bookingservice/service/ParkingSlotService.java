@@ -2,7 +2,7 @@ package org.jfs.drivein.bookingservice.service;
 
 import java.util.List;
 
-import org.jfs.drivein.bookingservice.NoSlotException;
+import org.jfs.drivein.bookingservice.exception.NoSlotException;
 import org.jfs.drivein.bookingservice.model.ParkingSlot;
 
 public interface ParkingSlotService {
