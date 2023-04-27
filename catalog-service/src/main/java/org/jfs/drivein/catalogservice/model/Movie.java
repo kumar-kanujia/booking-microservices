@@ -1,7 +1,11 @@
 package org.jfs.drivein.catalogservice.model;
 
-import com.mongodb.lang.NonNull;
-import lombok.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,13 +21,14 @@ public class Movie {
 
     @Id
     private String id;
-    @NonNull
+    @NotBlank(message = "")
     private String title;
-    @NonNull
+    @NotBlank(message="")
     private String genre;
-    @NonNull
+    @NotBlank(message="")
     private String description;
-    @NonNull
+    @Min(value = 0, message = "")
+    @Max(value = 10, message = "")
     private double rating;
 
 }
