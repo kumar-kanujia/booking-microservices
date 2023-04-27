@@ -6,14 +6,29 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+
 @Document
 @Getter
 @Setter
 @AllArgsConstructor
 public class ScheduleMovie {
+	
     @Id
+    @NotBlank(message = "")
     private String title;
+    
+    @Min(value = 1000 , message = "")
+    @Max(value = 15000 , message = "")
     private double tier1Price;
+    
+    @Min(value = 1000 , message = "")
+    @Max(value = 15000 , message = "")
     private double tier2Price;
+    
+    @Min(value = 1000 , message = "")
+    @Max(value = 15000 , message = "")
     private double tier3Price;
 }
