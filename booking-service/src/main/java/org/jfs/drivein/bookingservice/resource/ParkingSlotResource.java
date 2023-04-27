@@ -20,12 +20,12 @@ public class ParkingSlotResource {
         parkingSlotService.createSlot(parkingSlot);
     }
 
-    @PutMapping("slot/update/{date}/{slotTime}")
-    public void updateSlot(@RequestBody ParkingSlot parkingSlot){
-        parkingSlotService.createSlot(parkingSlot);
+    @PutMapping("slot/update")
+    public void updateSlot(@RequestBody ParkingSlot parkingSlot) throws UnavailableSlotException {
+        parkingSlotService.updateSlot(parkingSlot);
     }
 
-    @DeleteMapping("slot/delete/{date}/{slotTime}")
+    @DeleteMapping("slot/delete")
     public  void  deleteSlot(@RequestBody ParkingSlot parkingSlot) throws UnavailableSlotException {
         parkingSlotService.deleteSlot(parkingSlot);
     }

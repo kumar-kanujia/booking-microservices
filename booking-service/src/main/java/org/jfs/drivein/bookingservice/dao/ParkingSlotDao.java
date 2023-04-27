@@ -7,6 +7,7 @@ import java.util.Optional;
 /*
 author mujain
  */
+
 public interface ParkingSlotDao {
 
 	void saveParkingSlot(ParkingSlot parkingSlot);

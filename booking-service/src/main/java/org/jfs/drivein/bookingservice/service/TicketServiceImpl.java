@@ -18,7 +18,7 @@ author kumar-kanujia
 @Service
 @AllArgsConstructor
 public class TicketServiceImpl implements TicketService {
-	
+
 	private final TicketDao ticketDao;
 
 	private final ParkingSlotService parkingSlotService;
@@ -26,7 +26,8 @@ public class TicketServiceImpl implements TicketService {
 	private final ScheduleProxy scheduleProxy;
 
 	@Override
-	public void cancelTicket(String id) {
+	public void cancelTicket(String id) throws TicketNotFoundException {
+		ticketDao.viewTicket(id).orElseThrow(() -> new TicketNotFoundException(""));
 		ticketDao.cancelTicket(id);
 	}
 
@@ -38,19 +39,29 @@ public class TicketServiceImpl implements TicketService {
 	}
 
 	@Override
-	public Ticket bookTicket(String slotId, String carNumber, String section) throws UnavailableSlotException {
+	public Ticket bookTicket(String slotId, String carNumber, String tier) throws UnavailableSlotException {
 		ParkingSlot parkingSlot = parkingSlotService.findParkingSlotById(slotId);
 		Ticket ticket = new Ticket();
-		ticket.setCarNumber(carNumber);
-		switch(section){
-			case "frontSection":
-				if (parkingSlot.getFrontSection() >0){
-					ticket.setParkingSection(section);
-					ticket.setPrice(scheduleProxy.getPrice(section));
-					parkingSlot.setFrontSection(parkingSlot.getFrontSection()-1);
-
-				}
+		if (tier.equals("a") && parkingSlot.getTier1()>0){
+			ticket.setPrice(scheduleProxy.getPrice(parkingSlot.getId(), tier));
+			ticket.setSeatNo(parkingSlot.getTier1());
+			parkingSlot.setTier1(parkingSlot.getTier1()-1);
+		} else if (tier.equals("b") && parkingSlot.getTier2()>0) {
+			ticket.setPrice(scheduleProxy.getPrice(parkingSlot.getId(), tier));
+			ticket.setSeatNo(parkingSlot.getTier2());
+			parkingSlot.setTier2(parkingSlot.getTier2()-1);
+		}else if (tier.equals("c") && parkingSlot.getTier3()>0) {
+			ticket.setPrice(scheduleProxy.getPrice(parkingSlot.getId(), tier));
+			ticket.setSeatNo(parkingSlot.getTier3());
+			parkingSlot.setTier3(parkingSlot.getTier3()-1);
+		}else{
+			throw new UnavailableSlotException("");
 		}
-		return null;
+		ticket.setCarNumber(carNumber);
+		ticket.setTitle(parkingSlot.getTitle());
+		ticket.setDate(parkingSlot.getDate());
+		ticket.setSlotTime(parkingSlot.getSlotTime());
+		ticket.setTier(tier);
+		return ticketDao.saveTicket(ticket);
 	}
 }

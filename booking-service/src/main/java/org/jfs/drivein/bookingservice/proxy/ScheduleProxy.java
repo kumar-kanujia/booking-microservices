@@ -5,8 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ScheduleProxy {
 
-
-    public double getPrice(String section) {
-        return 0.0;
+    public double getPrice(String id, String tier) {
+        return  1000.00;
     }
 }
