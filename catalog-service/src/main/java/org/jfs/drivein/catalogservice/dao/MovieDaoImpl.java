@@ -2,7 +2,6 @@ package org.jfs.drivein.catalogservice.dao;
 
 import org.jfs.drivein.catalogservice.model.Movie;
 import org.jfs.drivein.catalogservice.repository.MoviesRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -14,7 +13,6 @@ public class MovieDaoImpl implements MovieDao {
 
     private final MoviesRepository moviesRepository;
 
-    @Autowired
     public MovieDaoImpl(MoviesRepository moviesRepository) {
         this.moviesRepository = moviesRepository;
     }
@@ -37,6 +35,6 @@ public class MovieDaoImpl implements MovieDao {
 
     @Override
     public List<Movie> viewAllMovie() {
-        return moviesRepository.findAll();
+        return (List<Movie>) moviesRepository.findAll();
     }
 }

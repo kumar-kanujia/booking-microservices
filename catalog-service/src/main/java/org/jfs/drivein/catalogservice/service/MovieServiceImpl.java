@@ -1,9 +1,8 @@
 package org.jfs.drivein.catalogservice.service;
 
 import org.jfs.drivein.catalogservice.dao.MovieDao;
-import org.jfs.drivein.catalogservice.exception.InvalidMovieTitleException;
+import org.jfs.drivein.catalogservice.exception.MovieTitleNotFoundException;
 import org.jfs.drivein.catalogservice.model.Movie;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -12,9 +11,8 @@ import java.util.Optional;
 @Component
 public class MovieServiceImpl implements MovieService{
 
-    private MovieDao movieDao;
+    private final MovieDao movieDao;
 
-    @Autowired
     public MovieServiceImpl(MovieDao movieDao) {
         this.movieDao = movieDao;
     }
@@ -25,20 +23,20 @@ public class MovieServiceImpl implements MovieService{
     }
 
     @Override
-    public Movie updateMovie(String title , Movie movie) throws InvalidMovieTitleException {
+    public Movie updateMovie(String title , Movie movie) throws MovieTitleNotFoundException {
     	Optional<Movie> movieOptional =  movieDao.viewMovie(title);
     	if(movieOptional.isEmpty()) {
-    		throw new InvalidMovieTitleException();
+    		throw new MovieTitleNotFoundException("");
     	}
     	movie.setId(movieOptional.get().getId());
         return movieDao.saveMovie(movie);
     }
 
     @Override
-    public Movie viewMovie(String title) throws InvalidMovieTitleException{
+    public Movie viewMovie(String title) throws MovieTitleNotFoundException{
     	Optional<Movie> movieOptional =  movieDao.viewMovie(title);
     	if(movieOptional.isEmpty()) {
-    		throw new InvalidMovieTitleException();
+    		throw new MovieTitleNotFoundException("");
     	}
         return movieOptional.get();
     }
