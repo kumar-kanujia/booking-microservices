@@ -5,6 +5,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.io.Serial;
 
+/*
+author kumar- 1.0.0
+ */
+
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class TicketNotFoundException extends Exception{
 

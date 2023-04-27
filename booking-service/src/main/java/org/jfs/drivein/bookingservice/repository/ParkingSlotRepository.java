@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 /*
-author kumar-kanujia
+author kumar- 1.0.0
  */
 public interface ParkingSlotRepository extends CrudRepository<ParkingSlot, String>{
 
