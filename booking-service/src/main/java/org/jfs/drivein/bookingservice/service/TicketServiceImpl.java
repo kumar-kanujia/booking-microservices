@@ -1,8 +1,16 @@
 package org.jfs.drivein.bookingservice.service;
 
-import org.jfs.drivein.bookingservice.model.Ticket;
+import java.util.Optional;
 
+import org.jfs.drivein.bookingservice.dao.TicketDao;
+import org.jfs.drivein.bookingservice.exception.TicketNotFoundException;
+import org.jfs.drivein.bookingservice.model.Ticket;
+import org.springframework.stereotype.Service;
+
+@Service
 public class TicketServiceImpl implements TicketService {
+	
+	private TicketDao ticketDao;
 
 	@Override
 	public Ticket bookTicket(Ticket ticket) {
@@ -11,21 +19,20 @@ public class TicketServiceImpl implements TicketService {
 	}
 
 	@Override
-	public Ticket updateTicket(Ticket ticket) {
+	public void cancelTicket(String id) {
 		// TODO Auto-generated method stub
-		return null;
+		ticketDao.cancelTicket(id);
 	}
 
 	@Override
-	public void cancelTicket(Ticket ticket) {
+	public Optional<Ticket> viewTicket(String id) throws TicketNotFoundException{
 		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Ticket viewTicket(Ticket ticket) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Optional<Ticket> ticket =  ticketDao.viewTicket(id);
+		if(ticket.isEmpty()) {
+			throw new TicketNotFoundException("");
+		}
+		return ticket;
 	}
 
 }
