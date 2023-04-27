@@ -1,19 +1,21 @@
 package org.jfs.drivein.bookingservice.dao;
 
-import java.util.Optional;
-
+import lombok.AllArgsConstructor;
 import org.jfs.drivein.bookingservice.model.Ticket;
 import org.jfs.drivein.bookingservice.repository.TicketRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
+/*
+author kumar-kanujia
+ */
+
 @Repository
+@AllArgsConstructor
 public class TicketDaoImpl implements TicketDao {
 
 	private final TicketRepository ticketRepository;
-
-	public TicketDaoImpl(TicketRepository ticketRepository) {
-		this.ticketRepository = ticketRepository;
-	}
 
 	@Override
 	public Ticket saveTicket(Ticket ticket) {

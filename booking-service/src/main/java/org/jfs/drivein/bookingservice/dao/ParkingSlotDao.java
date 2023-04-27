@@ -1,17 +1,26 @@
 package org.jfs.drivein.bookingservice.dao;
 
+import org.jfs.drivein.bookingservice.model.ParkingSlot;
+
 import java.util.List;
 import java.util.Optional;
-
-import org.jfs.drivein.bookingservice.model.ParkingSlot;
+/*
+author mujain
+ */
 
 public interface ParkingSlotDao {
 
-	ParkingSlot saveParkingSlot(ParkingSlot parkingSlot);
+	void saveParkingSlot(ParkingSlot parkingSlot);
 
-	void deleteParkingSlot(String id);
+	void deleteParkingSlot(ParkingSlot parkingSlot);
 
-	List<ParkingSlot> findParkingSlot(String title);
+	List<ParkingSlot> findParkingSlotByTitle(String title);
 
-	Optional<ParkingSlot> findParkingSlot(String title, String date);
+	List<ParkingSlot> findParkingSlotByTitleAndDate(String title, String date);
+
+	List<ParkingSlot> findParkingSlotByDate(String date);
+
+	Optional<ParkingSlot> findParkingSlotByDateAndTime(String date, String time);
+
+    Optional<ParkingSlot> findParkingSlotById(String slotId);
 }
