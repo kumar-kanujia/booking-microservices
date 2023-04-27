@@ -17,9 +17,8 @@ import java.net.URI;
 import java.util.List;
 
 /*
-author kumar- 1.0.0
+author kumar-kanujia
  */
-
 @RestController
 @AllArgsConstructor
 public class BookingResource {

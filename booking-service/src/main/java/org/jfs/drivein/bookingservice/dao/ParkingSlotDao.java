@@ -4,9 +4,8 @@ import org.jfs.drivein.bookingservice.model.ParkingSlot;
 
 import java.util.List;
 import java.util.Optional;
-
 /*
-author mujain 1.0.0
+author mujain
  */
 public interface ParkingSlotDao {
 

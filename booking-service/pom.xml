@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>org.jfs.drive-in</groupId>
 	<artifactId>booking-service</artifactId>
-	<version>1.0.0</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<name>booking-service</name>
 	<description>booking-service</description>
 	<properties>
