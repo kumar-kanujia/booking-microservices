@@ -5,48 +5,43 @@ import java.util.Optional;
 import org.jfs.drivein.scheduleservice.dao.ScheduleDao;
 import org.jfs.drivein.scheduleservice.exception.InvalidScheduleDateException;
 import org.jfs.drivein.scheduleservice.model.Schedule;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class ScheduleCrudServiceImpl implements ScheduleCrudService {
 
-	private ScheduleDao dao;
+	private ScheduleDao scheduleDao;
 
 	public ScheduleCrudServiceImpl(ScheduleDao dao) {
-		this.dao = dao;
+		this.scheduleDao = dao;
 	}
 
 	@Override
 	public Schedule addSchedule(Schedule schedule) {
-		// TODO Auto-generated method stub
-		return dao.saveSchedule(schedule);
+		return scheduleDao.saveSchedule(schedule);
 	}
 
 	@Override
 	public Schedule updateSchedule(String date, Schedule schedule) throws InvalidScheduleDateException {
-		// TODO Auto-generated method stub
-		Optional<Schedule> optional = dao.viewSchedule(date);
+		Optional<Schedule> optional = scheduleDao.viewSchedule(date);
 		if (optional.isEmpty()) {
-			throw new InvalidScheduleDateException();
+			throw new InvalidScheduleDateException("Please enter valid date");
 		}
 		schedule.setId(optional.get().getId());
 		schedule.setDate(date);
-		return dao.saveSchedule(schedule);
+		return scheduleDao.saveSchedule(schedule);
 	}
 
 	@Override
 	public void deleteSchedule(String date) {
-		// TODO Auto-generated method stub
-
-		dao.deleteSchedule(dao.viewSchedule(date).get());
+		scheduleDao.deleteSchedule(scheduleDao.viewSchedule(date).get());
 	}
 
 	@Override
 	public Schedule viewSchedule(String date) throws InvalidScheduleDateException {
-		// TODO Auto-generated method stub
-		Optional<Schedule> optional = dao.viewSchedule(date);
+		Optional<Schedule> optional = scheduleDao.viewSchedule(date);
 		if (optional.isEmpty()) {
-			throw new InvalidScheduleDateException();
+			throw new InvalidScheduleDateException("Please enter valid date");
 		}
 		return optional.get();
 	}
