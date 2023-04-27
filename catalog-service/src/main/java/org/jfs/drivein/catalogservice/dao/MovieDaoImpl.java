@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class MovieDaoImpl implements MovieDao {
@@ -23,23 +24,19 @@ public class MovieDaoImpl implements MovieDao {
         return moviesRepository.save(movie);
     }
 
+
     @Override
-    public Movie updateMovie(Movie movie) {
-        return moviesRepository.save(movie);
+    public Optional<Movie> viewMovie(String title) {
+        return moviesRepository.findByTitle(title);
     }
 
     @Override
-    public Movie viewMovie(String title) {
-        return moviesRepository.findByTitle(title).get();
-    }
-
-    @Override
-    public Movie deleteMovie(String title) {
-        return moviesRepository.deleteMovieByTitle(title).get();
+    public void deleteMovie(String title) {
+        moviesRepository.deleteMovieByTitle(title);
     }
 
     @Override
     public List<Movie> viewAllMovie() {
-        return (List<Movie>) moviesRepository.findAll();
+        return moviesRepository.findAll();
     }
 }

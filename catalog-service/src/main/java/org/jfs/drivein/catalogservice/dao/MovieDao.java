@@ -3,11 +3,11 @@ package org.jfs.drivein.catalogservice.dao;
 import org.jfs.drivein.catalogservice.model.Movie;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MovieDao {
     Movie saveMovie(Movie movie);
-    Movie updateMovie(Movie movie);
-    Movie viewMovie(String title);
-    Movie deleteMovie(String title);
+    Optional<Movie> viewMovie(String title);
+    void deleteMovie(String title);
     List<Movie> viewAllMovie();
 }

@@ -13,7 +13,6 @@ author kumar-kanujia
 @Getter
 @Setter
 @AllArgsConstructor
-@ToString
 public class Movie {
 
     @Id
@@ -25,6 +24,6 @@ public class Movie {
     @NonNull
     private String description;
     @NonNull
-    private int rating;
+    private double rating;
 
 }
