@@ -47,7 +47,7 @@ public class ScheduleResource {
 	}
 
 	@DeleteMapping("delete/{date}")
-	public ResponseEntity<?> deleteSchedule(@PathVariable String date) {
+	public ResponseEntity<?> deleteSchedule(@PathVariable String date) throws InvalidScheduleDateException {
 		crudService.deleteSchedule(date);
 		return ResponseEntity.noContent().build();
 	}

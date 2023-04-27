@@ -4,9 +4,8 @@ import java.util.Optional;
 
 import org.jfs.drivein.scheduleservice.model.Schedule;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
+
 public interface ScheduleRepository extends CrudRepository<Schedule, String> {
 	public Optional<Schedule> findByDate(String date);
 }
