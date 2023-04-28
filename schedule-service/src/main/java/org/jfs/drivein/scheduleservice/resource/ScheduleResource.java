@@ -52,7 +52,7 @@ public class ScheduleResource {
 		return ResponseEntity.noContent().build();
 	}
 
-	@GetMapping("price/{id}/{tier}")
+	@GetMapping("price/{id}/{tier}/{slotTime}")
 	public double getPrice(@PathVariable String id, @PathVariable String tier, @PathVariable String slotTime)
 			throws InvalidScheduleDateException {
 

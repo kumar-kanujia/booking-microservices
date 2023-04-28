@@ -1,12 +1,13 @@
 package org.jfs.drivein.bookingservice.dao;
 
-import lombok.AllArgsConstructor;
+import java.util.List;
+import java.util.Optional;
+
 import org.jfs.drivein.bookingservice.model.ParkingSlot;
 import org.jfs.drivein.bookingservice.repository.ParkingSlotRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
+import lombok.AllArgsConstructor;
 
 /*
 author kumar-kanujia mujain
@@ -45,7 +46,7 @@ public class ParkingSlotDaoImpl implements ParkingSlotDao {
 
 	@Override
 	public Optional<ParkingSlot> findParkingSlotByDateAndTime(String date, String time) {
-		return slotRepository.findByDateAndDate(date, time);
+		return slotRepository.findByDateAndSlotTime(date, time);
 	}
 
 	@Override
