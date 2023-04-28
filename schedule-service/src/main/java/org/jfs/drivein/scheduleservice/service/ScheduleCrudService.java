@@ -5,11 +5,13 @@ import org.jfs.drivein.scheduleservice.model.Schedule;
 
 public interface ScheduleCrudService {
 
-    Schedule addSchedule(Schedule schedule);
+    void addSchedule(Schedule schedule);
 
 	Schedule updateSchedule(String date, Schedule schedule) throws InvalidScheduleDateException;
 
 	void deleteSchedule(String date) throws InvalidScheduleDateException;
 
 	Schedule viewSchedule(String date) throws InvalidScheduleDateException;
+
+	double getPrice(String id, String tier, String slotTime) throws InvalidScheduleDateException;
 }

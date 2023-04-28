@@ -21,7 +21,7 @@ import jakarta.validation.Valid;
 @RestController
 public class ScheduleResource {
 
-	private ScheduleCrudService crudService;
+	private final ScheduleCrudService crudService;
 
 	public ScheduleResource(ScheduleCrudService crudService) {
 		this.crudService = crudService;
@@ -50,5 +50,12 @@ public class ScheduleResource {
 	public ResponseEntity<?> deleteSchedule(@PathVariable String date) throws InvalidScheduleDateException {
 		crudService.deleteSchedule(date);
 		return ResponseEntity.noContent().build();
+	}
+
+	@GetMapping("price/{id}/{tier}")
+	public double getPrice(@PathVariable String id, @PathVariable String tier, @PathVariable String slotTime)
+			throws InvalidScheduleDateException {
+
+		return crudService.getPrice(id, tier, slotTime);
 	}
 }

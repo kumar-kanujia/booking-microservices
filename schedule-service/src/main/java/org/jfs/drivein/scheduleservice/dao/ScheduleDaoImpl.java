@@ -1,10 +1,10 @@
 package org.jfs.drivein.scheduleservice.dao;
 
+import java.util.Optional;
+
 import org.jfs.drivein.scheduleservice.model.Schedule;
 import org.jfs.drivein.scheduleservice.repository.ScheduleRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
 
 /*
 author kumar-kanujia
@@ -32,6 +32,12 @@ public class ScheduleDaoImpl implements ScheduleDao {
 	@Override
 	public void deleteSchedule(Schedule schedule) {
 		repository.delete(schedule);
+	}
+
+	@Override
+	public Optional<Schedule> viewScheduleById(String id) {
+		// TODO Auto-generated method stub
+		return repository.findById(id);
 	}
 
 }

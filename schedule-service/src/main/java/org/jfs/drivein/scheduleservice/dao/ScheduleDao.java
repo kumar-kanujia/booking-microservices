@@ -14,4 +14,6 @@ public interface ScheduleDao {
 	Optional<Schedule> viewSchedule(String date);
 
 	void deleteSchedule(Schedule schedule);
+
+	Optional<Schedule> viewScheduleById(String id);
 }
