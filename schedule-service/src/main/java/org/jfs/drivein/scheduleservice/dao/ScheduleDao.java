@@ -4,6 +4,9 @@ import java.util.Optional;
 
 import org.jfs.drivein.scheduleservice.model.Schedule;
 
+/*
+author kumar-kanujia
+ */
 public interface ScheduleDao {
 
 	Schedule saveSchedule(Schedule schedule);
@@ -11,4 +14,6 @@ public interface ScheduleDao {
 	Optional<Schedule> viewSchedule(String date);
 
 	void deleteSchedule(Schedule schedule);
+
+	Optional<Schedule> viewScheduleById(String id);
 }

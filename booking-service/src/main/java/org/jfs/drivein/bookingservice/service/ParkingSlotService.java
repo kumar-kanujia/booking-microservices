@@ -1,10 +1,10 @@
 package org.jfs.drivein.bookingservice.service;
 
+import java.util.List;
+
 import org.jfs.drivein.bookingservice.exception.UnavailableSlotException;
 import org.jfs.drivein.bookingservice.exception.UnavailableTitleException;
 import org.jfs.drivein.bookingservice.model.ParkingSlot;
-
-import java.util.List;
 
 /*
 author kumar-kanujia
@@ -12,11 +12,6 @@ author kumar-kanujia
 
 public interface ParkingSlotService {
 
-	void createSlot(ParkingSlot parkingSlot);
-
-	void updateSlot(ParkingSlot parkingSlot) throws UnavailableSlotException;
-
-	void deleteSlot(ParkingSlot id) throws UnavailableSlotException;
 
 	List<ParkingSlot> findParkingSlotByTitle(String title) throws UnavailableTitleException;
 
@@ -27,4 +22,10 @@ public interface ParkingSlotService {
 	ParkingSlot findParkingSlotByDateAndTime(String date, String time) throws UnavailableSlotException;
 
 	ParkingSlot findParkingSlotById(String slotId) throws UnavailableSlotException;
+
+	void createSlot(String title, String date, String slotTime);
+
+	void updateSlot(String title, String date, String slotTime) throws UnavailableSlotException;
+
+	void deleteSlot(String date, String slotTime) throws UnavailableSlotException;
 }
