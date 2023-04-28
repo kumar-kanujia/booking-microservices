@@ -1,14 +1,15 @@
 package org.jfs.drivein.bookingservice.service;
 
-import lombok.AllArgsConstructor;
+import java.util.List;
+import java.util.Optional;
+
 import org.jfs.drivein.bookingservice.dao.ParkingSlotDao;
 import org.jfs.drivein.bookingservice.exception.UnavailableSlotException;
 import org.jfs.drivein.bookingservice.exception.UnavailableTitleException;
 import org.jfs.drivein.bookingservice.model.ParkingSlot;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import lombok.AllArgsConstructor;
 
 /*
 author kumar-kanujia
@@ -21,21 +22,11 @@ public class ParkingSlotServiceImpl implements ParkingSlotService {
 	private final ParkingSlotDao parkingSlotDao;
 
 
-	@Override
-	public void createSlot(ParkingSlot parkingSlot) {
-		parkingSlotDao.saveParkingSlot(new ParkingSlot(parkingSlot.getTitle(),parkingSlot.getDate(), parkingSlot.getSlotTime(), 20,20,20));
-	}
+
 
 	@Override
-	public void updateSlot(ParkingSlot parkingSlot) throws UnavailableSlotException {
-		ParkingSlot slot = findParkingSlotByDateAndTime(parkingSlot.getDate(), parkingSlot.getSlotTime());
-		slot.setTitle(parkingSlot.getTitle());
-		parkingSlotDao.saveParkingSlot(slot);
-	}
-
-	@Override
-	public void deleteSlot(ParkingSlot parkingSlot) throws UnavailableSlotException {
-		ParkingSlot slot = findParkingSlotByDateAndTime(parkingSlot.getDate(), parkingSlot.getSlotTime());
+	public void deleteSlot(String date, String slotTime) throws UnavailableSlotException {
+		ParkingSlot slot = findParkingSlotByDateAndTime(date, slotTime);
 		parkingSlotDao.deleteParkingSlot(slot);
 	}
 
@@ -72,5 +63,18 @@ public class ParkingSlotServiceImpl implements ParkingSlotService {
 		Optional<ParkingSlot> optionalParkingSlot = parkingSlotDao.findParkingSlotById(slotId);
 		if (optionalParkingSlot.isEmpty()) throw new UnavailableSlotException("");
 		return optionalParkingSlot.get();
+	}
+
+	@Override
+	public void createSlot(String title, String date, String slotTime) {
+		// TODO Auto-generated method stub
+		parkingSlotDao.saveParkingSlot(new ParkingSlot(title, date, slotTime, 20, 20, 20));
+	}
+
+	@Override
+	public void updateSlot(String title, String date, String slotTime) throws UnavailableSlotException {
+		ParkingSlot slot = findParkingSlotByDateAndTime(date, slotTime);
+		slot.setTitle(title);
+		parkingSlotDao.saveParkingSlot(slot);
 	}
 }
