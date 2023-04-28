@@ -1,12 +1,15 @@
 package org.jfs.drivein.scheduleservice.dao;
 
-import java.util.Optional;
-
 import org.jfs.drivein.scheduleservice.model.Schedule;
 import org.jfs.drivein.scheduleservice.repository.ScheduleRepository;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component
+import java.util.Optional;
+
+/*
+author kumar-kanujia
+ */
+@Repository
 public class ScheduleDaoImpl implements ScheduleDao {
 
 	private final ScheduleRepository repository;

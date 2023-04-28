@@ -1,5 +1,8 @@
 package org.jfs.drivein.scheduleservice.proxy;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class BookingProxy {
 
 	public void createSlot(String title, String date, String slotTime) {
