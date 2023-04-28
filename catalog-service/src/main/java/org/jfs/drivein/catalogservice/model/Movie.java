@@ -31,4 +31,7 @@ public class Movie {
     @Max(value = 10, message = "")
     private double rating;
 
+    public Movie() {
+
+    }
 }

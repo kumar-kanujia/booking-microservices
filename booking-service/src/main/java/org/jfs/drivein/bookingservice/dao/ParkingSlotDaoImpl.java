@@ -3,6 +3,7 @@ package org.jfs.drivein.bookingservice.dao;
 import java.util.List;
 import java.util.Optional;
 
+import jakarta.validation.Valid;
 import org.jfs.drivein.bookingservice.model.ParkingSlot;
 import org.jfs.drivein.bookingservice.repository.ParkingSlotRepository;
 import org.springframework.stereotype.Repository;
@@ -20,7 +21,7 @@ public class ParkingSlotDaoImpl implements ParkingSlotDao {
 	private final ParkingSlotRepository slotRepository;
 
 	@Override
-	public void saveParkingSlot(ParkingSlot parkingSlot) {
+	public void saveParkingSlot(@Valid ParkingSlot parkingSlot) {
 		slotRepository.save(parkingSlot);
 	}
 

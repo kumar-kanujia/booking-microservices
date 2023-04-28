@@ -1,5 +1,6 @@
 package org.jfs.drivein.bookingservice.dao;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.jfs.drivein.bookingservice.model.Ticket;
 import org.jfs.drivein.bookingservice.repository.TicketRepository;
@@ -18,7 +19,7 @@ public class TicketDaoImpl implements TicketDao {
 	private final TicketRepository ticketRepository;
 
 	@Override
-	public Ticket saveTicket(Ticket ticket) {
+	public Ticket saveTicket(@Valid Ticket ticket) {
 		// TODO Auto-generated method stub
 		return ticketRepository.save(ticket);
 	}
