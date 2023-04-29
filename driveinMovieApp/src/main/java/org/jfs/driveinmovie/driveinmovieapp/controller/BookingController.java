@@ -27,4 +27,11 @@ public class BookingController {
     public String deleteTicket(@RequestParam String id){
         return "ticket";
     }
+
+    @GetMapping("bookTicket")
+    public String getBookingPage(){
+        return "bookTicket";
+    }
+
+
 }
