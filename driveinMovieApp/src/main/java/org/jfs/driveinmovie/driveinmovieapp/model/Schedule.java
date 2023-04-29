@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -14,9 +12,7 @@ import java.util.Date;
 public class Schedule {
 
     private String id;
-
-    private Date date;
-
+    private String date;
     private ScheduleMovie slot1;
     private ScheduleMovie slot2;
     private ScheduleMovie slot3;
