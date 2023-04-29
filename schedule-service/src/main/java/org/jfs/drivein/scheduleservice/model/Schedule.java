@@ -31,4 +31,8 @@ public class Schedule {
     private ScheduleMovie slot2;
 	@Valid
     private ScheduleMovie slot3;
+
+    public Schedule() {
+
+    }
 }
