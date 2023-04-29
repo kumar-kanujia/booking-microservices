@@ -43,7 +43,6 @@ public class MovieServiceImpl implements MovieService{
 
     @Override
     public void deleteMovie(String title){
-    	
     	movieDao.deleteMovie(title);
     }
 

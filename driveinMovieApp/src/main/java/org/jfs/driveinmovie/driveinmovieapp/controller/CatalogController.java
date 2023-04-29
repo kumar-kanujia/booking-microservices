@@ -1,6 +1,7 @@
 package org.jfs.driveinmovie.driveinmovieapp.controller;
 
 import lombok.AllArgsConstructor;
+import org.jfs.driveinmovie.driveinmovieapp.exception.MovieTitleNotFoundException;
 import org.jfs.driveinmovie.driveinmovieapp.model.Movie;
 import org.jfs.driveinmovie.driveinmovieapp.service.CatalogService;
 import org.springframework.stereotype.Controller;
@@ -26,27 +27,31 @@ public class CatalogController {
     }
 
     @PostMapping(value = "saveMovie")
-    public String saveMovie(@ModelAttribute Movie movie){
+    public String saveMovie(@ModelAttribute Movie movie) throws MovieTitleNotFoundException {
+        if (movie.getId()== null){
+            catalogService.update(movie);
+        }else{
         catalogService.save(movie);
-        return "redirect:/catalog";
+        }
+        return "redirect:/adminCatalog";
     }
 
-    @GetMapping(value = "changeCatalog")
+    @GetMapping(value = "adminCatalog")
     public String changeCatalog(ModelMap modelMap){
         modelMap.put("catalogList", catalogService.listAllMovie());
         return "adminCatalog";
     }
 
     @GetMapping(value = "updateMovie")
-    public String updateMovie(@RequestParam String id, ModelMap modelMap){
-        modelMap.put("movie", catalogService.findMovieById(id));
+    public String updateMovie(@RequestParam String title, ModelMap modelMap) throws MovieTitleNotFoundException {
+        modelMap.put("movie", catalogService.findMovieByTitle(title));
         return "saveMovie";
     }
 
     @GetMapping("deleteMovie")
-    public String deleteMovie(@RequestParam String id){
-        catalogService.deleteById(id);
-        return "redirect:/changeCatalog";
+    public String deleteMovie(@RequestParam String title) throws MovieTitleNotFoundException {
+        catalogService.deleteByTitle(title);
+        return "redirect:/adminCatalog";
     }
 
     @PostMapping("searchMovie")

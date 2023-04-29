@@ -25,8 +25,8 @@
                                 </div>
                             </div>
                         </div></td>
-                        <td style="vertical-align: middle;"><a href="${pageContext.request.contextPath}/updateMovie?id=${movie.id}" class="btn btn-outline-primary">Update</a></td>
-                        <td style="vertical-align: middle;"><a href="${pageContext.request.contextPath}/deleteMovie?id=${movie.id}" class="btn btn-outline-danger" methods="">Delete</a></td>
+                        <td style="vertical-align: middle;"><a href="${pageContext.request.contextPath}/updateMovie?title=${movie.title}" class="btn btn-outline-primary">Update</a></td>
+                        <td style="vertical-align: middle;"><a href="${pageContext.request.contextPath}/deleteMovie?title=${movie.title}" class="btn btn-outline-danger" methods="">Delete</a></td>
                     </tr>
                 </c:forEach>
                 </tbody>

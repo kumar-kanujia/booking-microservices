@@ -1,38 +1,28 @@
 package org.jfs.driveinmovie.driveinmovieapp.resource;
 
 import org.jfs.driveinmovie.driveinmovieapp.model.Movie;
-import org.springframework.stereotype.Component;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
-@Component
-public class CatalogResource {
+@FeignClient(name = "catalog-service", url = "http://localhost:8010/")
+public interface CatalogResource {
 
-    private static final List<Movie> movieList = new ArrayList<>();
+    @GetMapping("view")
+    List<Movie> getAllMovie();
 
-    static {
-        movieList.add(new Movie("1", "Avenger", "Action", "Marvel Movie", 9));
-        movieList.add(new Movie("2", "Avenger 1", "Action", "Marvel Movie", 9));
-        movieList.add(new Movie("3", "Avenger 2", "Action", "Marvel Movie", 9));
-    }
+    @PostMapping("save")
+    ResponseEntity<Movie> save(@RequestBody Movie movie);
 
+    @PutMapping("update/{title}")
+    ResponseEntity<Movie> updateMovie(@PathVariable String title, @RequestBody Movie movie);
 
-    public List<Movie> getAllMovie(){
-        return movieList;
-    }
+    @GetMapping("view/{title}")
+    ResponseEntity<Movie>  findMovieByTitle(@PathVariable String title);
 
-    public void save(Movie movie) {
-        movieList.add(movie);
-    }
-
-    public Movie findMovieById(String id) {
-        return movieList.stream().filter(t-> t.getId().equals(id)).findFirst().orElseThrow();
-    }
-
-    public void deleteById(String id) {
-        movieList.removeIf(t->t.getId().equals(id));
-    }
-
+    @DeleteMapping("delete/{title}")
+    ResponseEntity<?> deleteByTitle(@PathVariable String title);
 
 }

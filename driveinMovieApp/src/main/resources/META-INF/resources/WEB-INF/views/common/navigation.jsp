@@ -21,7 +21,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownCatalog">
                         <li><a class="dropdown-item" href="${pageContext.request.contextPath}/addMovie">Add</a></li>
-                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/changeCatalog">View</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/adminCatalog">View</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">

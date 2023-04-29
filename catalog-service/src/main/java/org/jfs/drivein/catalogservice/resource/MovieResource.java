@@ -3,6 +3,7 @@ package org.jfs.drivein.catalogservice.resource;
 import java.net.URI;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
 import org.jfs.drivein.catalogservice.exception.MovieTitleNotFoundException;
 import org.jfs.drivein.catalogservice.model.Movie;
 import org.jfs.drivein.catalogservice.service.MovieService;
@@ -20,14 +21,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 
 @RestController
+@AllArgsConstructor
 public class MovieResource {
 
-
     private final MovieService movieService;
-
-    public MovieResource(MovieService movieService) {
-        this.movieService = movieService;
-    }
 
     @PostMapping("save")
     public ResponseEntity<Movie> saveMovie(@RequestBody @Valid Movie movie, HttpServletRequest request){
@@ -54,7 +51,7 @@ public class MovieResource {
         return ResponseEntity.noContent().build();
     }
     
-    @GetMapping("view/all")
+    @GetMapping("view")
     public List<Movie> viewAllMovie(){
     	return movieService.viewAllMovie();
     }
