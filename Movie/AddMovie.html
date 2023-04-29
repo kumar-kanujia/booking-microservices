@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <title>Open Movie</title>
+</head>
+<body>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8 col-sm-10 col-12">
+        <form class="border p-3">
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" required>
+          </div>
+          <div class="mb-3">
+            <label for="genre" class="form-label">Genre</label>
+            <input type="text" class="form-control" id="genre" name="genre" required>
+          </div>
+          <div class="mb-3">
+            <label for="rating" class="form-label">Rating</label>
+            <input type="number" class="form-control" id="rating" name="rating" min="1" max="10" required>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+<script src="js/bootstrap.min.js"></script>
+<script src="jquery.min.js"></script>
+</body>
+</html>
