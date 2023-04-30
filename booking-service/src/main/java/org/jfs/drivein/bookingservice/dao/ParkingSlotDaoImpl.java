@@ -21,8 +21,8 @@ public class ParkingSlotDaoImpl implements ParkingSlotDao {
 	private final ParkingSlotRepository slotRepository;
 
 	@Override
-	public void saveParkingSlot(@Valid ParkingSlot parkingSlot) {
-		slotRepository.save(parkingSlot);
+	public ParkingSlot saveParkingSlot(@Valid ParkingSlot parkingSlot) {
+		return slotRepository.save(parkingSlot);
 	}
 
 	@Override

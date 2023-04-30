@@ -1,6 +1,7 @@
 package org.jfs.drivein.scheduleservice.model;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.NoArgsConstructor;
 import org.jfs.drivein.scheduleservice.validation.ForwardDateValidation;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -16,6 +17,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class Schedule {
 	
     @Id
@@ -32,6 +34,4 @@ public class Schedule {
 	@Valid
     private ScheduleMovie slot3;
 
-    public Schedule() {
-    }
 }

@@ -12,6 +12,7 @@ author kumar-kanujia
 
 public interface ParkingSlotService {
 
+	ParkingSlot saveSlot(ParkingSlot parkingSlot);
 
 	void deleteSlot(String id) throws UnavailableSlotException;
 
@@ -25,6 +26,6 @@ public interface ParkingSlotService {
 
 	ParkingSlot findParkingSlotById(String slotId) throws UnavailableSlotException;
 
-	void saveSlot(ParkingSlot parkingSlot);
+
 	void updateSlot(String id, String title) throws UnavailableSlotException;
 }

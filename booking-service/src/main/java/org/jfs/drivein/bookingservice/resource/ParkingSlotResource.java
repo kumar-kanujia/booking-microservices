@@ -3,6 +3,7 @@ package org.jfs.drivein.bookingservice.resource;
 import org.jfs.drivein.bookingservice.exception.UnavailableSlotException;
 import org.jfs.drivein.bookingservice.model.ParkingSlot;
 import org.jfs.drivein.bookingservice.service.ParkingSlotService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import lombok.AllArgsConstructor;
@@ -17,8 +18,8 @@ public class ParkingSlotResource {
     private final ParkingSlotService parkingSlotService;
 
 	@PostMapping("slot/create")
-	public void createSlot(@RequestBody ParkingSlot parkingSlot) {
-		parkingSlotService.saveSlot(parkingSlot);
+	public ResponseEntity<ParkingSlot> createSlot(@RequestBody ParkingSlot parkingSlot) {
+		return ResponseEntity.ok(parkingSlotService.saveSlot(parkingSlot));
     }
 
 	@PutMapping("slot/update/{id}/{title}")

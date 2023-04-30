@@ -22,8 +22,8 @@ public class ParkingSlotServiceImpl implements ParkingSlotService {
 	private final ParkingSlotDao parkingSlotDao;
 
 	@Override
-	public void saveSlot(ParkingSlot parkingSlot) {
-		parkingSlotDao.saveParkingSlot(parkingSlot);
+	public ParkingSlot saveSlot(ParkingSlot parkingSlot) {
+		return parkingSlotDao.saveParkingSlot(parkingSlot);
 	}
 
 	@Override
