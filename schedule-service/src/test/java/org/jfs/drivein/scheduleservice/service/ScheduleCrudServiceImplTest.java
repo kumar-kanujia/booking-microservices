@@ -4,6 +4,7 @@ import org.jfs.drivein.scheduleservice.client.BookingClient;
 import org.jfs.drivein.scheduleservice.config.PropertiesConfig;
 import org.jfs.drivein.scheduleservice.dao.ScheduleDao;
 import org.jfs.drivein.scheduleservice.exception.InvalidScheduleDateException;
+import org.jfs.drivein.scheduleservice.model.ParkingSlot;
 import org.jfs.drivein.scheduleservice.model.Schedule;
 import org.jfs.drivein.scheduleservice.model.ScheduleMovie;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,9 +42,9 @@ public class ScheduleCrudServiceImplTest {
         String slotTimeB = "03:00 AM";
         String slotTimeC = "09:00 PM";
         schedule = new Schedule();
-        schedule.setSlot1(new ScheduleMovie("Avengers", 14000, 10000, 5000));
-        schedule.setSlot2(new ScheduleMovie("Civil War", 15000, 11000, 2000));
-        schedule.setSlot3(new ScheduleMovie("Captain", 12000, 9000, 3000));
+        schedule.setSlot1(new ScheduleMovie("101" , "Avengers", 14000, 10000, 5000));
+        schedule.setSlot2(new ScheduleMovie("102" , "Civil War", 15000, 11000, 2000));
+        schedule.setSlot3(new ScheduleMovie("103" , "Captain", 12000, 9000, 3000));
         schedule.setDate(date);
         propertiesConfig.setSlotTimeA(slotTimeA);
         propertiesConfig.setSlotTimeB(slotTimeB);
@@ -53,12 +54,11 @@ public class ScheduleCrudServiceImplTest {
 
     @Test
     public void testAddSchedule() {
-
         scheduleCrudServiceImpl.addSchedule(schedule);
 
-        verify(bookingClient).createSlot(schedule.getSlot1().getTitle(), schedule.getDate(), propertiesConfig.getSlotTimeA());
-        verify(bookingClient).createSlot(schedule.getSlot1().getTitle(), schedule.getDate(), propertiesConfig.getSlotTimeB());
-        verify(bookingClient).createSlot(schedule.getSlot1().getTitle(), schedule.getDate(), propertiesConfig.getSlotTimeC());
+        verify(bookingClient).createSlot(new ParkingSlot(schedule.getSlot1().getId(),schedule.getSlot1().getTitle(), schedule.getDate(), propertiesConfig.getSlotTimeA(), 20, 20,20 ));
+        verify(bookingClient).createSlot(new ParkingSlot(schedule.getSlot2().getId(),schedule.getSlot2().getTitle(), schedule.getDate(), propertiesConfig.getSlotTimeB(), 20, 20,20 ));
+        verify(bookingClient).createSlot(new ParkingSlot(schedule.getSlot3().getId(),schedule.getSlot3().getTitle(), schedule.getDate(), propertiesConfig.getSlotTimeC(), 20, 20,20 ));
 
         verify(scheduleDao).saveSchedule(schedule);
     }
@@ -70,9 +70,9 @@ public class ScheduleCrudServiceImplTest {
 
         scheduleCrudServiceImpl.updateSchedule(date, schedule);
 
-        verify(bookingClient).updateSlot(schedule.getSlot1().getTitle(), schedule.getDate(), propertiesConfig.getSlotTimeA());
-        verify(bookingClient).updateSlot(schedule.getSlot1().getTitle(), schedule.getDate(), propertiesConfig.getSlotTimeB());
-        verify(bookingClient).updateSlot(schedule.getSlot1().getTitle(), schedule.getDate(), propertiesConfig.getSlotTimeC());
+        verify(bookingClient).updateSlot(schedule.getSlot1().getId(),schedule.getSlot1().getTitle());
+        verify(bookingClient).updateSlot(schedule.getSlot2().getId(),schedule.getSlot2().getTitle());
+        verify(bookingClient).updateSlot(schedule.getSlot3().getId(),schedule.getSlot3().getTitle());
 
         verify(scheduleDao).saveSchedule(schedule);
     }
@@ -93,9 +93,9 @@ public class ScheduleCrudServiceImplTest {
 
         scheduleCrudServiceImpl.deleteSchedule(date);
 
-        verify(bookingClient , times(3)).deleteSlot(schedule.getDate(), propertiesConfig.getSlotTimeA());
-        verify(bookingClient , times(3)).deleteSlot(schedule.getDate(), propertiesConfig.getSlotTimeB());
-        verify(bookingClient , times(3)).deleteSlot(schedule.getDate(), propertiesConfig.getSlotTimeC());
+        verify(bookingClient).deleteSlot(schedule.getSlot1().getId());
+        verify(bookingClient).deleteSlot(schedule.getSlot2().getId());
+        verify(bookingClient).deleteSlot(schedule.getSlot3().getId());
 
         verify(scheduleDao).deleteSchedule(schedule);
     }
