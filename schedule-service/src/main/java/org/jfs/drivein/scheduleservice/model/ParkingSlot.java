@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.jfs.drivein.scheduleservice.validation.ForwardDateValidation;
 import org.springframework.data.annotation.Id;
@@ -19,6 +20,7 @@ author kumar-kanujia
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class ParkingSlot {
 
 	@Id

@@ -5,14 +5,17 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+
+@Document
 @Getter
 @Setter
 @AllArgsConstructor
-@Document
+@NoArgsConstructor
 public class ScheduleMovie {
 	
     @Id
