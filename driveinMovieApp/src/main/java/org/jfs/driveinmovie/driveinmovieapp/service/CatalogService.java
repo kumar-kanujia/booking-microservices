@@ -24,6 +24,11 @@ public class CatalogService {
         return catalogResource.getAllMovie();
     }
 
+    public void update(Movie movie) throws MovieTitleNotFoundException {
+        if (! catalogResource.updateMovie(movie.getTitle(), movie).getStatusCode().isSameCodeAs(HttpStatus.ACCEPTED))
+            throw new MovieTitleNotFoundException("");
+    }
+
 
 
     public Movie findMovieByTitle(String title) throws MovieTitleNotFoundException {
@@ -34,10 +39,7 @@ public class CatalogService {
         return movieResponseEntity.getBody();
     }
 
-    public void update(Movie movie) throws MovieTitleNotFoundException {
-        if (! catalogResource.updateMovie(movie.getTitle(), movie).getStatusCode().isSameCodeAs(HttpStatus.ACCEPTED))
-            throw new MovieTitleNotFoundException("");
-    }
+
 
     public void deleteByTitle(String title) throws MovieTitleNotFoundException {
         if (! catalogResource.deleteByTitle(title).getStatusCode().isSameCodeAs(HttpStatus.NO_CONTENT))
