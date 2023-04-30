@@ -4,13 +4,13 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10 col-sm-12 col-12">
-            <form:form modelAttribute="schedule" class="border p-3" action="${pageContext.request.contextPath}/updateSchedule" method="post">
+            <form:form modelAttribute="schedule" class="border p-3" action="${pageContext.request.contextPath}/addSchedule" method="post">
                 <div class="m-md-5 text-center">
                     <h5 class="card-title">Upcoming Showtime</h5>
                 </div>
                 <div class="mb-3">
                     <label for="date" class="form-label">Date (Upcoming)</label>
-                    <form:input path="date" type="date" class="form-control" id="date" name="date" readonly="false"/>
+                    <form:input path="date" type="date" class="form-control" id="date" name="date" readonly="false" required="required"/>
                 </div>
                 <div class="mb-3">
                     <h4>3AM</h4>

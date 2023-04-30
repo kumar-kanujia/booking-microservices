@@ -1,8 +1,10 @@
 package org.jfs.driveinmovie.driveinmovieapp.controller;
 
 import lombok.AllArgsConstructor;
+import org.jfs.driveinmovie.driveinmovieapp.exception.InvalidScheduleDateException;
+import org.jfs.driveinmovie.driveinmovieapp.exception.ServiceDownException;
 import org.jfs.driveinmovie.driveinmovieapp.model.Schedule;
-import org.jfs.driveinmovie.driveinmovieapp.model.ScheduleMovie;
+import org.jfs.driveinmovie.driveinmovieapp.service.ScheduleService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,34 +16,36 @@ import org.springframework.web.bind.annotation.RequestParam;
 @AllArgsConstructor
 public class ScheduleController {
 
+
+    private ScheduleService scheduleService;
+
+
     @GetMapping("viewSchedule")
     public String showViewSchedulePage(){
         return "scheduleSearchPage";
     }
 
     @PostMapping("viewSchedule")
-    public String viewSchedulePage(@RequestParam String date, ModelMap modelMap){
-        System.out.println(date);
-        ScheduleMovie scheduleMovie = new ScheduleMovie("Tarzan", 10.0, 10.0, 10.0);
-        modelMap.put("schedule", new Schedule("1", "2020-12-12", scheduleMovie, scheduleMovie, scheduleMovie));
+    public String viewSchedulePage(@RequestParam String date, ModelMap modelMap) throws InvalidScheduleDateException {
+        modelMap.put("schedule", scheduleService.viewSchedule(date));
         return "scheduleViewPage";
     }
 
     @GetMapping("updateSchedule")
-    public String showScheduleUpdatePage(@RequestParam String id, ModelMap modelMap){
-        System.out.println(id);
-        ScheduleMovie scheduleMovie = new ScheduleMovie("Tarzan", 10.0, 10.0, 10.0);
-        modelMap.put("schedule", new Schedule("1", "2020-12-12", scheduleMovie, scheduleMovie, scheduleMovie));
+    public String showScheduleUpdatePage(@RequestParam String date, ModelMap modelMap) throws InvalidScheduleDateException {
+        modelMap.put("schedule", scheduleService.viewSchedule(date));
         return "scheduleUpdatePage";
     }
 
     @PostMapping("updateSchedule")
-    public String updateSchedule(@ModelAttribute Schedule schedule){
+    public String updateSchedule(@ModelAttribute Schedule schedule) throws ServiceDownException {
+        scheduleService.updateSchedule(schedule);
         return "redirect:/viewSchedule";
     }
 
     @GetMapping("deleteSchedule")
-    public String deleteSchedule(@RequestParam String id){
+    public String deleteSchedule(@RequestParam String date) throws ServiceDownException {
+        scheduleService.deleteSchedule(date);
         return "redirect:/viewSchedule";
     }
 
@@ -52,7 +56,8 @@ public class ScheduleController {
     }
 
     @PostMapping(value = "addSchedule")
-    public String showAddSchedulePage(@ModelAttribute Schedule schedule, ModelMap modelMap){
+    public String addSchedule(@ModelAttribute Schedule schedule) throws ServiceDownException {
+        System.out.println(schedule.getDate());
         return "redirect:/addSchedule";
     }
 

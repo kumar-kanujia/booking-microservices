@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
-@FeignClient("booking-service")
+@FeignClient(value = "booking-service", url = "http://localhost:8020/")
 public interface BookingClient {
 
 	@PostMapping("slot/create/{title}/{date}/{slotTime}")
