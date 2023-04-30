@@ -47,7 +47,7 @@ public class ScheduleCrudServiceImpl implements ScheduleCrudService {
 	public void deleteSchedule(String date) throws InvalidScheduleDateException {
 		Schedule schedule = scheduleDao.viewSchedule(date).orElse(null);
 		if (schedule == null) {
-			throw new InvalidScheduleDateException("");
+			throw new InvalidScheduleDateException("Please enter valid date");
 		}
 		bookingClient.deleteSlot(schedule.getSlot1().getId());
 		bookingClient.deleteSlot(schedule.getSlot2().getId());
@@ -70,7 +70,7 @@ public class ScheduleCrudServiceImpl implements ScheduleCrudService {
 		Optional<Schedule> scheduleOptional = scheduleDao.viewScheduleById(id);
 		double price;
 		if (scheduleOptional.isEmpty()) {
-			throw new InvalidScheduleDateException("Please enter valid date");
+			throw new InvalidScheduleDateException("Please enter valid ID");
 		}
 		Schedule schedule = scheduleOptional.get();
 		if (tier.equals("a")) {
