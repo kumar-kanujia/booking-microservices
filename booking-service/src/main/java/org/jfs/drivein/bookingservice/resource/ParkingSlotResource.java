@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import lombok.AllArgsConstructor;
 
+import java.util.List;
+
 /*
 author kumar-kanujia
  */
@@ -16,6 +18,11 @@ author kumar-kanujia
 public class ParkingSlotResource {
 
     private final ParkingSlotService parkingSlotService;
+
+	@GetMapping("slot/{slotId}")
+	public List<ParkingSlot> getParkingSlot(@PathVariable String slotId) throws UnavailableSlotException {
+		return parkingSlotService.findParkingSlotById(slotId);
+	}
 
 	@PostMapping("slot/create")
 	public ResponseEntity<ParkingSlot> createSlot(@RequestBody ParkingSlot parkingSlot) {

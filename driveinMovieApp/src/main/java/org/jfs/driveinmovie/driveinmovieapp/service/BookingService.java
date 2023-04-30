@@ -1,30 +1,40 @@
 package org.jfs.driveinmovie.driveinmovieapp.service;
 
+import lombok.AllArgsConstructor;
 import org.jfs.driveinmovie.driveinmovieapp.model.ParkingSlot;
 import org.jfs.driveinmovie.driveinmovieapp.model.Ticket;
+import org.jfs.driveinmovie.driveinmovieapp.resource.BookingResource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class BookingService {
+
+    private final BookingResource bookingResource;
+
     public Ticket getTicket(String id) {
-        return new Ticket(id,"832y84", "u49901","ejwfbkw", "ejkkfb","feafwe",23,378 );
+        return bookingResource.viewTicket(id).getBody();
     }
 
     public ParkingSlot getSlot(String slotId) {
-        return new ParkingSlot(slotId, "Avenger", "2020-12-10", "09:00 AM", 20, 20, 20);
+        return bookingResource.findParkingSlot(slotId).get(0);
     }
 
-    public Ticket bookTicket(Ticket ticket) {
-        return new Ticket("13", "avengers", "2020-12-12", "622 pm", ticket.getCarNumber(), ticket.getTier(), 30, 729);
+    public Ticket bookTicket(String slotId, Ticket ticket) {
+        return bookingResource.bookTicket(slotId, ticket.getTier(), ticket.getCarNumber()).getBody();
     }
 
     public List<ParkingSlot> getParkingSlotByTitle(String title) {
-        return List.of(new ParkingSlot("hdhs", title, "2020-12-10", "09:00 AM", 20, 20, 20));
+    return bookingResource.findByTitle(title);
     }
 
     public List<ParkingSlot> getParkingSlotByTitleAndDate(String title, String date) {
-        return List.of(new ParkingSlot("hdhs", title + "tile", "2023-12-10", "09:00 AM", 20, 20, 20));
+        return bookingResource.findByTitleAndDate(title, date);
+    }
+
+    public void cancelTicket(String id) {
+        bookingResource.cancelTicket(id);
     }
 }

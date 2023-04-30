@@ -24,7 +24,7 @@ public interface ParkingSlotService {
 
 	ParkingSlot findParkingSlotByDateAndTime(String date, String time) throws UnavailableSlotException;
 
-	ParkingSlot findParkingSlotById(String slotId) throws UnavailableSlotException;
+	List<ParkingSlot> findParkingSlotById(String slotId) throws UnavailableSlotException;
 
 
 	void updateSlot(String id, String title) throws UnavailableSlotException;

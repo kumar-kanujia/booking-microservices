@@ -51,7 +51,7 @@ public class ParkingSlotDaoImpl implements ParkingSlotDao {
 	}
 
 	@Override
-	public Optional<ParkingSlot> findParkingSlotById(String slotId) {
-		return slotRepository.findById(slotId);
+	public List<ParkingSlot> findParkingSlotById(String slotId) {
+		return (List<ParkingSlot>) slotRepository.findAllById(List.of(slotId));
 	}
 }

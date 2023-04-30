@@ -23,5 +23,5 @@ public interface ParkingSlotDao {
 
 	Optional<ParkingSlot> findParkingSlotByDateAndTime(String date, String time);
 
-    Optional<ParkingSlot> findParkingSlotById(String slotId);
+    List<ParkingSlot> findParkingSlotById(String slotId);
 }

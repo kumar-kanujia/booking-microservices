@@ -28,7 +28,7 @@ public class ParkingSlotServiceImpl implements ParkingSlotService {
 
 	@Override
 	public void deleteSlot(String id) throws UnavailableSlotException {
-		ParkingSlot slot = findParkingSlotById(id);
+		ParkingSlot slot = findParkingSlotById(id).get(0);
 		parkingSlotDao.deleteParkingSlot(slot);
 	}
 
@@ -61,17 +61,17 @@ public class ParkingSlotServiceImpl implements ParkingSlotService {
 	}
 
 	@Override
-	public ParkingSlot findParkingSlotById(String slotId) throws UnavailableSlotException {
-		Optional<ParkingSlot> optionalParkingSlot = parkingSlotDao.findParkingSlotById(slotId);
-		if (optionalParkingSlot.isEmpty()) throw new UnavailableSlotException("");
-		return optionalParkingSlot.get();
+	public List<ParkingSlot> findParkingSlotById(String slotId) throws UnavailableSlotException {
+		List<ParkingSlot> parkingSlot = parkingSlotDao.findParkingSlotById(slotId);
+		if (parkingSlot.size()==0) throw new UnavailableSlotException("");
+		return parkingSlot;
 	}
 
 
 
 	@Override
 	public void updateSlot(String id, String title) throws UnavailableSlotException {
-		ParkingSlot slot = findParkingSlotById(id);
+		ParkingSlot slot = findParkingSlotById(id).get(0);
 		slot.setTitle(title);
 		parkingSlotDao.saveParkingSlot(slot);
 	}

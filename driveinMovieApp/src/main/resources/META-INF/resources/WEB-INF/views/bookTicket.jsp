@@ -4,6 +4,7 @@
 <div class="container mt-4">
     <h1 class="text-center my-5">Sundown Form</h1>
     <form:form modelAttribute="slot" action="${pageContext.request.contextPath}/bookTicket"  method="post">
+        <input type="hidden" value="${slot.id}" name="slotId" id="slotId">
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
             <form:input path="title" type="text" class="form-control" id="title" name="title" readonly="true"/>

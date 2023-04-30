@@ -29,6 +29,7 @@ public class BookingController {
 
     @GetMapping("cancelTicket")
     public String deleteTicket(@RequestParam String id, ModelMap modelMap){
+        bookingService.cancelTicket(id);
         modelMap.put("msg", "Ticket id " + id + " is canceled");
         return "ticket";
     }
@@ -40,8 +41,8 @@ public class BookingController {
     }
 
     @PostMapping("bookTicket")
-    public String bookTicket(@ModelAttribute Ticket ticket, ModelMap modelMap){
-        modelMap.put("ticket", bookingService.bookTicket(ticket));
+    public String bookTicket(@ModelAttribute Ticket ticket,@RequestParam String slotId, ModelMap modelMap){
+        modelMap.put("ticket", bookingService.bookTicket(slotId ,ticket));
         return "ticket";
     }
 
