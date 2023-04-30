@@ -14,12 +14,6 @@ public class CatalogController {
 
     private final CatalogService catalogService;
 
-    @GetMapping("catalog")
-    public String showCatalog(ModelMap modelMap){
-        modelMap.put("catalogList", catalogService.listAllMovie());
-        return "catalog";
-    }
-
     @GetMapping("addMovie")
     public String showAddMoviePage(ModelMap modelMap){
         modelMap.put("movie", new Movie());
@@ -27,19 +21,13 @@ public class CatalogController {
     }
 
     @PostMapping(value = "saveMovie")
-    public String saveMovie(@ModelAttribute Movie movie) throws MovieTitleNotFoundException {
-        if (movie.getId()== null){
-            catalogService.update(movie);
+    public String addMovie(@ModelAttribute Movie movie) throws MovieTitleNotFoundException {
+        if (movie.getId()!= null){
+            catalogService.save(movie);
         }else{
-        catalogService.save(movie);
+            catalogService.update(movie);
         }
         return "redirect:/adminCatalog";
-    }
-
-    @GetMapping(value = "adminCatalog")
-    public String changeCatalog(ModelMap modelMap){
-        modelMap.put("catalogList", catalogService.listAllMovie());
-        return "adminCatalog";
     }
 
     @GetMapping(value = "updateMovie")
@@ -47,6 +35,23 @@ public class CatalogController {
         modelMap.put("movie", catalogService.findMovieByTitle(title));
         return "saveMovie";
     }
+
+    @GetMapping("catalog")
+    public String showCatalog(ModelMap modelMap){
+        modelMap.put("catalogList", catalogService.listAllMovie());
+        return "catalog";
+    }
+
+
+
+
+
+    @GetMapping(value = "adminCatalog")
+    public String changeCatalog(ModelMap modelMap){
+        modelMap.put("catalogList", catalogService.listAllMovie());
+        return "adminCatalog";
+    }
+
 
     @GetMapping("deleteMovie")
     public String deleteMovie(@RequestParam String title) throws MovieTitleNotFoundException {
