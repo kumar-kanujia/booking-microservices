@@ -1,12 +1,16 @@
 package org.jfs.driveinmovie.driveinmovieapp.controller;
 
-import lombok.AllArgsConstructor;
 import org.jfs.driveinmovie.driveinmovieapp.exception.MovieTitleNotFoundException;
 import org.jfs.driveinmovie.driveinmovieapp.model.Movie;
 import org.jfs.driveinmovie.driveinmovieapp.service.CatalogService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import lombok.AllArgsConstructor;
 
 @Controller
 @AllArgsConstructor
@@ -22,7 +26,7 @@ public class CatalogController {
 
     @GetMapping(value = "updateMovie")
     public String updateMovie(@RequestParam String title, ModelMap modelMap) throws MovieTitleNotFoundException {
-        modelMap.put("movie", catalogService.findMovieByTitle(title));
+		modelMap.put("movie", catalogService.findMovieByTitle(title).get(0));
         return "updateMovie";
     }
 

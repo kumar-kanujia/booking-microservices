@@ -35,7 +35,7 @@
                 </li>
             </ul>
             <form class="d-flex" action="${pageContext.request.contextPath}/searchMovie" method="post">
-                <input id="title" name="title" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <input id="title" name="title" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" required="required">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
             <ul class="navbar-nav">
