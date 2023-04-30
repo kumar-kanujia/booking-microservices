@@ -34,16 +34,6 @@ public class ScheduleCrudServiceImpl implements ScheduleCrudService {
     }
 
 	@Override
-	public Schedule viewSchedule(String date) throws InvalidScheduleDateException {
-		//Working
-		Optional<Schedule> optional = scheduleDao.viewSchedule(date);
-		if (optional.isEmpty()) {
-			throw new InvalidScheduleDateException("Please enter valid date");
-		}
-		return optional.get();
-	}
-
-	@Override
 	public Schedule updateSchedule(String date, Schedule schedule) throws InvalidScheduleDateException {
 		Optional<Schedule> optional = scheduleDao.viewSchedule(date);
 		if (optional.isEmpty()) {
@@ -69,6 +59,14 @@ public class ScheduleCrudServiceImpl implements ScheduleCrudService {
 		scheduleDao.deleteSchedule(schedule);
 	}
 
+	@Override
+	public Schedule viewSchedule(String date) throws InvalidScheduleDateException {
+		Optional<Schedule> optional = scheduleDao.viewSchedule(date);
+		if (optional.isEmpty()) {
+			throw new InvalidScheduleDateException("Please enter valid date");
+		}
+		return optional.get();
+	}
 
 	@Override
 	public double getPrice(String id, String tier, String slotTime) throws InvalidScheduleDateException {
