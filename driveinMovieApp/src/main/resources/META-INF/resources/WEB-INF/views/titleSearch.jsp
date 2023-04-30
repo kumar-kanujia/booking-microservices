@@ -8,8 +8,8 @@
                 <h1 class="card-title text-center">Open Air Box</h1>
                 <form class="form-inline justify-content-center text-center" action="${pageContext.request.contextPath}/searchSlot" method="post">
                     <div class="form-group mx-sm-3 mb-2">
-                        <label for="title" class="sr-only">Search Parking Slot</label>
-                        <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title Name" required>
+                        <label for="title" class="sr-only">Search Parking Slot By Title</label>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="${title}" required>
                     </div>
                     <button type="submit" class="btn btn-primary mb-2 ">Search</button>
                 </form>

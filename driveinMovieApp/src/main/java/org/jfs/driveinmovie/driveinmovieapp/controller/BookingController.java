@@ -47,7 +47,8 @@ public class BookingController {
     }
 
     @GetMapping("searchSlot")
-    public String searchParkingSlotByTitle(){
+    public String searchParkingSlotByTitle(@RequestParam String title, ModelMap modelMap){
+        modelMap.put("title", title);
         return "titleSearch";
     }
 
