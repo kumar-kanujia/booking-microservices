@@ -21,12 +21,14 @@ public class ParkingSlotServiceImpl implements ParkingSlotService {
 	
 	private final ParkingSlotDao parkingSlotDao;
 
-
-
+	@Override
+	public void saveSlot(ParkingSlot parkingSlot) {
+		parkingSlotDao.saveParkingSlot(parkingSlot);
+	}
 
 	@Override
-	public void deleteSlot(String date, String slotTime) throws UnavailableSlotException {
-		ParkingSlot slot = findParkingSlotByDateAndTime(date, slotTime);
+	public void deleteSlot(String id) throws UnavailableSlotException {
+		ParkingSlot slot = findParkingSlotById(id);
 		parkingSlotDao.deleteParkingSlot(slot);
 	}
 
@@ -65,16 +67,13 @@ public class ParkingSlotServiceImpl implements ParkingSlotService {
 		return optionalParkingSlot.get();
 	}
 
-	@Override
-	public void createSlot(String title, String date, String slotTime) {
-		// TODO Auto-generated method stub
-		parkingSlotDao.saveParkingSlot(new ParkingSlot(title, date, slotTime, 20, 20, 20));
-	}
+
 
 	@Override
-	public void updateSlot(String title, String date, String slotTime) throws UnavailableSlotException {
-		ParkingSlot slot = findParkingSlotByDateAndTime(date, slotTime);
+	public void updateSlot(String id, String title) throws UnavailableSlotException {
+		ParkingSlot slot = findParkingSlotById(id);
 		slot.setTitle(title);
 		parkingSlotDao.saveParkingSlot(slot);
 	}
+
 }

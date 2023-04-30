@@ -33,6 +33,5 @@ public class Schedule {
     private ScheduleMovie slot3;
 
     public Schedule() {
-
     }
 }

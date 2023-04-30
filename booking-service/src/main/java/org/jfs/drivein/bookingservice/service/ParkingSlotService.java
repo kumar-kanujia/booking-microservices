@@ -13,6 +13,8 @@ author kumar-kanujia
 public interface ParkingSlotService {
 
 
+	void deleteSlot(String id) throws UnavailableSlotException;
+
 	List<ParkingSlot> findParkingSlotByTitle(String title) throws UnavailableTitleException;
 
 	List<ParkingSlot> findParkingSlotByTitleAndDate(String title, String date) throws UnavailableSlotException;
@@ -23,9 +25,6 @@ public interface ParkingSlotService {
 
 	ParkingSlot findParkingSlotById(String slotId) throws UnavailableSlotException;
 
-	void createSlot(String title, String date, String slotTime);
-
-	void updateSlot(String title, String date, String slotTime) throws UnavailableSlotException;
-
-	void deleteSlot(String date, String slotTime) throws UnavailableSlotException;
+	void saveSlot(ParkingSlot parkingSlot);
+	void updateSlot(String id, String title) throws UnavailableSlotException;
 }

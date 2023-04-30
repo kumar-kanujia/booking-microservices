@@ -1,12 +1,9 @@
 package org.jfs.drivein.bookingservice.resource;
 
 import org.jfs.drivein.bookingservice.exception.UnavailableSlotException;
+import org.jfs.drivein.bookingservice.model.ParkingSlot;
 import org.jfs.drivein.bookingservice.service.ParkingSlotService;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import lombok.AllArgsConstructor;
 
@@ -19,20 +16,20 @@ public class ParkingSlotResource {
 
     private final ParkingSlotService parkingSlotService;
 
-	@PostMapping("slot/create/{title}/{date}/{slotTime}")
-	public void createSlot(@PathVariable String title, @PathVariable String date, @PathVariable String slotTime) {
-		parkingSlotService.createSlot(title, date, slotTime);
+	@PostMapping("slot/create")
+	public void createSlot(@RequestBody ParkingSlot parkingSlot) {
+		parkingSlotService.saveSlot(parkingSlot);
     }
 
-	@PutMapping("slot/update/{title}/{date}/{slotTime}")
-	public void updateSlot(@PathVariable String title, @PathVariable String date, @PathVariable String slotTime)
+	@PutMapping("slot/update/{id}/{title}")
+	public void updateSlot(@PathVariable String id, @PathVariable String title)
 			throws UnavailableSlotException {
-		parkingSlotService.updateSlot(title, date, slotTime);
+		parkingSlotService.updateSlot(id, title);
     }
 
-	@DeleteMapping("slot/delete/{date}/{slotTime}")
-	public void deleteSlot(@PathVariable String date, @PathVariable String slotTime)
+	@DeleteMapping("slot/delete/{id}")
+	public void deleteSlot(@PathVariable String id)
 			throws UnavailableSlotException {
-		parkingSlotService.deleteSlot(date, slotTime);
+		parkingSlotService.deleteSlot(id);
     }
 }

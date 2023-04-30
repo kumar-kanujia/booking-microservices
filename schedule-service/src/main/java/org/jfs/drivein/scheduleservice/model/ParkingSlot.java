@@ -1,4 +1,4 @@
-package org.jfs.drivein.bookingservice.model;
+package org.jfs.drivein.scheduleservice.model;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.jfs.drivein.bookingservice.validation.ForwardDateValidation;
+import org.jfs.drivein.scheduleservice.validation.ForwardDateValidation;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -40,7 +40,5 @@ public class ParkingSlot {
 	@Max(value = 20 , message = "")
     private int tier3;
 
-	public ParkingSlot() {
-	}
-
 }
+

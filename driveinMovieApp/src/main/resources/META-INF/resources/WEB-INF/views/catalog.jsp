@@ -23,7 +23,7 @@
                                 </div>
                             </div>
                         </div></td>
-                        <td style="vertical-align: middle;"><a href="" class="btn btn-outline-primary">Book</a></td>
+                        <td style="vertical-align: middle;"><a href="${pageContext.request.contextPath}/searchSlot" class="btn btn-outline-primary">Book</a></td>
                     </tr>
                 </c:forEach>
                 </tbody>

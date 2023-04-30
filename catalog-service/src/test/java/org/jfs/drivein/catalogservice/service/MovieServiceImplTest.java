@@ -34,7 +34,6 @@ public class MovieServiceImplTest {
         movie.setGenre("Action");
         movie.setDescription("Description of Avengers");
         movie.setRating(6.5);
-
         when(movieDao.saveMovie(any(Movie.class))).thenReturn(movie);
         Movie savedMovie = movieServiceImpl.saveMovie(movie);
         assertEquals(movie, savedMovie);
@@ -48,7 +47,6 @@ public class MovieServiceImplTest {
         movie.setGenre("Action");
         movie.setDescription("Description of Avengers");
         movie.setRating(6.5);
-
         when(movieDao.viewMovie(title)).thenReturn(Optional.of(movie));
         when(movieDao.saveMovie(any(Movie.class))).thenReturn(movie);
         Movie updatedMovie = movieServiceImpl.updateMovie(title, movie);
@@ -63,7 +61,6 @@ public class MovieServiceImplTest {
         movie.setGenre("Action");
         movie.setDescription("Description of Avengers");
         movie.setRating(6.5);
-
         when(movieDao.viewMovie(title)).thenReturn(Optional.empty());
         assertThrows(MovieTitleNotFoundException.class , () -> movieServiceImpl.updateMovie(title , movie));
     }
@@ -76,7 +73,6 @@ public class MovieServiceImplTest {
         movie.setGenre("Action");
         movie.setDescription("Description of Avengers");
         movie.setRating(6.5);
-
         when(movieDao.viewMovie(title)).thenReturn(Optional.of(movie));
         Movie viewedMovie = movieServiceImpl.viewMovie(title);
         assertEquals(movie, viewedMovie);
@@ -85,7 +81,6 @@ public class MovieServiceImplTest {
     @Test
     public void viewMovieNotFoundTest() {
         String title = "No Movie";
-
         when(movieDao.viewMovie(title)).thenReturn(Optional.empty());
         assertThrows(MovieTitleNotFoundException.class, () -> movieServiceImpl.viewMovie(title));
     }
@@ -93,7 +88,6 @@ public class MovieServiceImplTest {
     @Test
     public void deleteMovieTest() {
         String title = "Avengers";
-
         movieServiceImpl.deleteMovie(title);
         verify(movieDao, times(1)).deleteMovie(title);
     }
@@ -101,7 +95,6 @@ public class MovieServiceImplTest {
     @Test
     public void viewAllMovieTest() {
         List<Movie> movies = Arrays.asList(new Movie(), new Movie());
-
         when(movieDao.viewAllMovie()).thenReturn(movies);
         List<Movie> viewedMovies = movieServiceImpl.viewAllMovie();
         assertEquals(movies, viewedMovies);

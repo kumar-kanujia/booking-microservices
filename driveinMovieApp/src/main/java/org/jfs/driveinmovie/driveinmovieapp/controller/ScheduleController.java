@@ -17,8 +17,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ScheduleController {
 
 
-    private ScheduleService scheduleService;
+    private final ScheduleService scheduleService;
+    @GetMapping("addSchedule")
+    public String showAddSchedulePage(ModelMap modelMap){
+        modelMap.put("schedule", new Schedule());
+        return "addSchedule";
+    }
 
+    @PostMapping(value = "addSchedule")
+    public String addSchedule(@ModelAttribute Schedule schedule) throws ServiceDownException {
+        scheduleService.addSchedule(schedule);
+        return "redirect:/addSchedule";
+    }
 
     @GetMapping("viewSchedule")
     public String showViewSchedulePage(){
@@ -49,16 +59,5 @@ public class ScheduleController {
         return "redirect:/viewSchedule";
     }
 
-    @GetMapping("addSchedule")
-    public String showAddSchedulePage(ModelMap modelMap){
-        modelMap.put("schedule", new Schedule());
-        return "addSchedule";
-    }
-
-    @PostMapping(value = "addSchedule")
-    public String addSchedule(@ModelAttribute Schedule schedule) throws ServiceDownException {
-        System.out.println(schedule.getDate());
-        return "redirect:/addSchedule";
-    }
 
 }

@@ -1,35 +1,34 @@
 <%@ include file="common/header.jsp"%>
 <%@ include file="common/navigation.jsp"%>
 
-<div class="container pt-5">
+<div class="container mt-4">
     <h1 class="text-center my-5">Sundown Form</h1>
-    <form>
+    <form:form modelAttribute="slot" action="${pageContext.request.contextPath}/bookTicket"  method="post">
         <div class="mb-3">
-            <label for="title" class="form-label">Title Date And Time</label>
-            <input type="text" class="form-control" id="title" name="title" readonly>
+            <label for="title" class="form-label">Title</label>
+            <form:input path="title" type="text" class="form-control" id="title" name="title" readonly="true"/>
         </div>
         <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" name="name" required>
+            <label for="date" class="form-label">Date</label>
+            <form:input path="date" type="date" class="form-control" id="date" name="date" readonly="true"/>
         </div>
         <div class="mb-3">
-            <label for="surname" class="form-label">Surname</label>
-            <input type="text" class="form-control" id="surname" name="surname" required>
+            <label for="time" class="form-label">Time</label>
+            <form:input path="slotTime" type="text" class="form-control" id="time" name="surname" readonly="true"/>
         </div>
         <div class="mb-3">
-            <label for="carnumber" class="form-label">Car Number</label>
-            <input type="text" class="form-control" id="carnumber" name="carnumber" required>
+            <label for="carNumber" class="form-label">Car Number</label>
+            <input type="text" class="form-control" id="carNumber" name="carNumber" required>
         </div>
         <div class="mb-3">
-            <label for="dropdown" class="form-label">Tier</label>
-            <select class="form-select" id="dropdown" name="dropdown" required>
-                <option value="">Select an option</option>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+            <label for="tier" class="form-label">Tier</label>
+            <select class="form-select" id="tier" name="tier" required>
+                <option value="a">Supreme</option>
+                <option value="b">General</option>
+                <option value="c">Economy</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    </form:form>
 </div>
 <%@ include file="common/footer.jsp"%>

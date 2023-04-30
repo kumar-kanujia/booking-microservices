@@ -1,3 +1,4 @@
+<%@ page import="org.jfs.driveinmovie.driveinmovieapp.model.Ticket" %>
 <%@ include file="common/header.jsp"%>
 <%@ include file="common/navigation.jsp"%>
 <div class="container py-5 shadow-lg mt-5">
@@ -19,7 +20,22 @@
             </div>
             <div class="row mb-3">
                 <div class="col-md-4">
-                    <strong>Seat Number:</strong> ${ticket.tier}:${ticket.seatNo}
+                    <%
+                        Ticket ticket = (Ticket)request.getAttribute("ticket");
+                      if(  ticket != null) {
+                          String cl = null;
+                          if (ticket.getTier().equals("a")) {
+                              cl = "Supreme";
+                          } else if (ticket.getTier().equals("b")) {
+                              cl = "General";
+                          } else {
+                              cl = "Economy";
+                          }
+                    %>
+                    <strong>Seat Number:</strong> <%=cl%> :${ticket.seatNo}
+                    <%
+                        }
+                    %>
                 </div>
                 <div class="col-md-4">
                     <strong>Price:</strong> $${ticket.price}
@@ -29,9 +45,9 @@
                 </div>
             </div>
         </div>
-
         <div class="container text-center btn-outline-primary">
-            <input value='Print' type='button' onclick='handlePrint()' class="btn btn-outline-danger"/>
+            <label for="print"><div>${msg}</div></label>
+            <input value='Print' type='button' onclick='handlePrint()' class="btn btn-outline-danger" id="print"/>
             <a href="${pageContext.request.contextPath}/cancelTicket?id=${ticket.id}" class="btn btn-outline-danger" methods="">Cancel</a>
         <script type="text/javascript">
             const handlePrint = () => {

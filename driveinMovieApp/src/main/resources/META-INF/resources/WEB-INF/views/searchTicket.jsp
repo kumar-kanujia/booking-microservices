@@ -6,11 +6,11 @@
     <div class="card p-4">
         <h1 class="mb-4">Booking Search</h1>
         <form action="${pageContext.request.contextPath}/viewTicket" method="post">
-            <div class="form-group">
+            <div class="form-group ui-autocomplete">
                 <label for="id" class="text-center m-md-1">Booking ID:</label>
-                <input type="text" class="form-control" id="id" name="id" placeholder="Enter booking ID">
+                <input type="text" class="form-control" id="id" name="id" placeholder="Enter booking ID" required>
             </div>
-            <div class="text-center">
+            <div class="text-center mt-5">
             <button type="submit" class="btn btn-primary mt-2 text-center">Search</button>
             </div>
         </form>
