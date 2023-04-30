@@ -1,6 +1,7 @@
 package org.jfs.drivein.scheduleservice.service;
 
-import lombok.AllArgsConstructor;
+import java.util.Optional;
+
 import org.jfs.drivein.scheduleservice.client.BookingClient;
 import org.jfs.drivein.scheduleservice.config.PropertiesConfig;
 import org.jfs.drivein.scheduleservice.dao.ScheduleDao;
@@ -9,7 +10,7 @@ import org.jfs.drivein.scheduleservice.model.ParkingSlot;
 import org.jfs.drivein.scheduleservice.model.Schedule;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
@@ -54,6 +55,9 @@ public class ScheduleCrudServiceImpl implements ScheduleCrudService {
 		bookingClient.updateSlot(scheduleToGetId.getSlot3().getSlotId(),schedule.getSlot3().getTitle());
 		schedule.setId(optional.get().getId());
 		schedule.setDate(date);
+		schedule.getSlot1().setSlotId(scheduleToGetId.getSlot1().getSlotId());
+		schedule.getSlot2().setSlotId(scheduleToGetId.getSlot2().getSlotId());
+		schedule.getSlot3().setSlotId(scheduleToGetId.getSlot3().getSlotId());
 		return scheduleDao.saveSchedule(schedule);
 	}
 
