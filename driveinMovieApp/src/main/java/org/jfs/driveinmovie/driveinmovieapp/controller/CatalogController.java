@@ -58,8 +58,8 @@ public class CatalogController {
     }
 
     @PostMapping("searchMovie")
-    public String searchMovie(@RequestParam String title){
-        System.out.println(title);
+    public String searchMovie(@RequestParam String title, ModelMap modelMap) throws MovieTitleNotFoundException {
+        modelMap.put("catalogList", catalogService.findMovieByTitle(title));
         return "catalog";
     }
 }
