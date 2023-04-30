@@ -22,6 +22,15 @@ public class ScheduleCrudServiceImpl implements ScheduleCrudService {
 	private final PropertiesConfig propertiesConfig;
 
 	@Override
+	public Schedule viewSchedule(String date) throws InvalidScheduleDateException {
+		Optional<Schedule> optional = scheduleDao.viewSchedule(date);
+		if (optional.isEmpty()) {
+			throw new InvalidScheduleDateException("Please enter valid date");
+		}
+		return optional.get();
+	}
+
+	@Override
 	public void addSchedule(Schedule schedule) {
 		//Working
 		ParkingSlot parkingSlot1 = new ParkingSlot(schedule.getSlot1().getTitle(), schedule.getDate(), propertiesConfig.getSlotTimeA(), 20, 20, 20);
@@ -39,9 +48,10 @@ public class ScheduleCrudServiceImpl implements ScheduleCrudService {
 		if (optional.isEmpty()) {
 			throw new InvalidScheduleDateException("Please enter valid date");
 		}
-		bookingClient.updateSlot(schedule.getSlot1().getSlotId(),schedule.getSlot1().getTitle());
-		bookingClient.updateSlot(schedule.getSlot2().getSlotId(),schedule.getSlot2().getTitle());
-		bookingClient.updateSlot(schedule.getSlot3().getSlotId(),schedule.getSlot3().getTitle());
+		Schedule scheduleToGetId = optional.get();
+		bookingClient.updateSlot(scheduleToGetId.getSlot1().getSlotId(),schedule.getSlot1().getTitle());
+		bookingClient.updateSlot(scheduleToGetId.getSlot2().getSlotId(),schedule.getSlot2().getTitle());
+		bookingClient.updateSlot(scheduleToGetId.getSlot3().getSlotId(),schedule.getSlot3().getTitle());
 		schedule.setId(optional.get().getId());
 		schedule.setDate(date);
 		return scheduleDao.saveSchedule(schedule);
@@ -49,23 +59,15 @@ public class ScheduleCrudServiceImpl implements ScheduleCrudService {
 
 	@Override
 	public void deleteSchedule(String date) throws InvalidScheduleDateException {
-		Schedule schedule = scheduleDao.viewSchedule(date).orElse(null);
-		if (schedule == null) {
-			throw new InvalidScheduleDateException("Please enter valid date");
-		}
-		bookingClient.deleteSlot(schedule.getSlot1().getSlotId());
-		bookingClient.deleteSlot(schedule.getSlot2().getSlotId());
-		bookingClient.deleteSlot(schedule.getSlot3().getSlotId());
-		scheduleDao.deleteSchedule(schedule);
-	}
-
-	@Override
-	public Schedule viewSchedule(String date) throws InvalidScheduleDateException {
 		Optional<Schedule> optional = scheduleDao.viewSchedule(date);
 		if (optional.isEmpty()) {
 			throw new InvalidScheduleDateException("Please enter valid date");
 		}
-		return optional.get();
+		Schedule schedule = optional.get();
+		bookingClient.deleteSlot(schedule.getSlot1().getSlotId());
+		bookingClient.deleteSlot(schedule.getSlot2().getSlotId());
+		bookingClient.deleteSlot(schedule.getSlot3().getSlotId());
+		scheduleDao.deleteSchedule(schedule);
 	}
 
 	@Override

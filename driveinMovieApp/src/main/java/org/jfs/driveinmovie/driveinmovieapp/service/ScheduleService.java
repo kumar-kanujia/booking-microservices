@@ -19,13 +19,6 @@ public class ScheduleService {
         }
     }
 
-
-    public void deleteSchedule(String date) throws ServiceDownException {
-        if (! scheduleResource.deleteSchedule(date).getStatusCode().isSameCodeAs(HttpStatus.NO_CONTENT)){
-            throw new ServiceDownException("");
-        }
-    }
-
     public Schedule viewSchedule(String date) throws InvalidScheduleDateException {
         Schedule schedule = scheduleResource.viewSchedule(date);
         if (schedule==null){
@@ -34,9 +27,20 @@ public class ScheduleService {
         return schedule;
     }
 
+
     public void updateSchedule(Schedule schedule) throws ServiceDownException {
         if (! scheduleResource.updateSchedule(schedule.getDate(), schedule).getStatusCode().isSameCodeAs(HttpStatus.ACCEPTED)){
             throw new ServiceDownException("");
         }
     }
+
+    public void deleteSchedule(String date) throws ServiceDownException {
+        if (! scheduleResource.deleteSchedule(date).getStatusCode().isSameCodeAs(HttpStatus.NO_CONTENT)){
+            throw new ServiceDownException("");
+        }
+    }
+
+
+
+
 }

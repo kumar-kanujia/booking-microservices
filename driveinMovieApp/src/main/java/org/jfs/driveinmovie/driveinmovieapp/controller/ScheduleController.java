@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 @AllArgsConstructor
 public class ScheduleController {
 
-
     private final ScheduleService scheduleService;
     @GetMapping("addSchedule")
     public String showAddSchedulePage(ModelMap modelMap){
