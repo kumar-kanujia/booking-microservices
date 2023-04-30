@@ -17,12 +17,19 @@ public class CatalogController {
     @GetMapping("addMovie")
     public String showAddMoviePage(ModelMap modelMap){
         modelMap.put("movie", new Movie());
-        return "saveMovie";
+        return "addMovie";
+    }
+
+    @GetMapping(value = "updateMovie")
+    public String updateMovie(@RequestParam String title, ModelMap modelMap) throws MovieTitleNotFoundException {
+        modelMap.put("movie", catalogService.findMovieByTitle(title));
+        return "updateMovie";
     }
 
     @PostMapping(value = "saveMovie")
     public String addMovie(@ModelAttribute Movie movie) throws MovieTitleNotFoundException {
-        if (movie.getId()!= null){
+        if (movie.getId().length()< 3){
+            movie.setId(null);
             catalogService.save(movie);
         }else{
             catalogService.update(movie);
@@ -30,20 +37,11 @@ public class CatalogController {
         return "redirect:/adminCatalog";
     }
 
-    @GetMapping(value = "updateMovie")
-    public String updateMovie(@RequestParam String title, ModelMap modelMap) throws MovieTitleNotFoundException {
-        modelMap.put("movie", catalogService.findMovieByTitle(title));
-        return "saveMovie";
-    }
-
     @GetMapping("catalog")
     public String showCatalog(ModelMap modelMap){
         modelMap.put("catalogList", catalogService.listAllMovie());
         return "catalog";
     }
-
-
-
 
 
     @GetMapping(value = "adminCatalog")
