@@ -33,5 +33,9 @@ public class BookingController {
         return "bookTicket";
     }
 
+    @GetMapping("searchSlot")
+    public String searchParkingSlotByTitle(String title){
+        return "titleSearch";
+    }
 
 }

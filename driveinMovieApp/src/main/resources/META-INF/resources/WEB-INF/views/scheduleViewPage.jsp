@@ -76,8 +76,8 @@
           </div>
         </div>
         <div class="text-center m-md-5">
-          <a href="${pageContext.request.contextPath}/updateSchedule?id=${schedule.id}" class="btn btn-outline-primary">Update</a>
-          <a href="${pageContext.request.contextPath}/deleteSchedule?id=${schedule.id}" class="btn btn-outline-primary">Remove</a>
+          <a href="${pageContext.request.contextPath}/updateSchedule?date=${schedule.date}" class="btn btn-outline-primary">Update</a>
+          <a href="${pageContext.request.contextPath}/deleteSchedule?date=${schedule.date}" class="btn btn-outline-primary">Remove</a>
         </div>
       </form:form>
     </div>

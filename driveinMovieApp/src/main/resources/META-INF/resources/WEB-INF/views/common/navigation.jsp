@@ -10,7 +10,7 @@
                     <a class="nav-link" href="${pageContext.request.contextPath}/catalog">Movies</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Book</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/searchSlot">Book</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/viewTicket">Ticket</a>
@@ -40,10 +40,7 @@
             </form>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Logout</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
                 </li>
             </ul>
         </div>
