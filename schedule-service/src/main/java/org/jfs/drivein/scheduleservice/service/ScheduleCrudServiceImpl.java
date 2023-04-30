@@ -47,7 +47,7 @@ public class ScheduleCrudServiceImpl implements ScheduleCrudService {
 	public void deleteSchedule(String date) throws InvalidScheduleDateException {
 		Schedule schedule = scheduleDao.viewSchedule(date).orElse(null);
 		if (schedule == null) {
-			throw new InvalidScheduleDateException("");
+			throw new InvalidScheduleDateException("Please enter valid date");
 		}
 		bookingClient.deleteSlot(schedule.getDate(), propertiesConfig.getSlotTimeA());
 		bookingClient.deleteSlot(schedule.getDate(), propertiesConfig.getSlotTimeB());
@@ -70,7 +70,7 @@ public class ScheduleCrudServiceImpl implements ScheduleCrudService {
 		Optional<Schedule> scheduleOptional = scheduleDao.viewScheduleById(id);
 		double price;
 		if (scheduleOptional.isEmpty()) {
-			throw new InvalidScheduleDateException("Please enter valid date");
+			throw new InvalidScheduleDateException("Please enter valid ID");
 		}
 		Schedule schedule = scheduleOptional.get();
 		if (tier.equals("a")) {
@@ -86,12 +86,12 @@ public class ScheduleCrudServiceImpl implements ScheduleCrudService {
 			else if (slotTime.equals(propertiesConfig.getSlotTimeB()))
 				price = schedule.getSlot2().getTier2Price();
 			else
-				price = schedule.getSlot2().getTier2Price();
+				price = schedule.getSlot3().getTier2Price();
 		} else {
 			if (slotTime.equals(propertiesConfig.getSlotTimeA()))
-				price = schedule.getSlot3().getTier3Price();
+				price = schedule.getSlot1().getTier3Price();
 			else if (slotTime.equals(propertiesConfig.getSlotTimeB()))
-				price = schedule.getSlot3().getTier3Price();
+				price = schedule.getSlot2().getTier3Price();
 			else
 				price = schedule.getSlot3().getTier3Price();
 		}
