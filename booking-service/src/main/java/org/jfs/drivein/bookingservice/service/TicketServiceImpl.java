@@ -27,9 +27,18 @@ public class TicketServiceImpl implements TicketService {
 	private final ScheduleClient scheduleClient;
 
 	@Override
-	public void cancelTicket(String id) throws TicketNotFoundException {
-		ticketDao.viewTicket(id).orElseThrow(() -> new TicketNotFoundException(""));
+	public void cancelTicket(String id) throws TicketNotFoundException, UnavailableSlotException {
+		Ticket ticket = ticketDao.viewTicket(id).orElseThrow(() -> new TicketNotFoundException(""));
 		ticketDao.cancelTicket(id);
+		ParkingSlot slot = parkingSlotService.findParkingSlotByDateAndTime(ticket.getDate(), ticket.getSlotTime());
+		if (ticket.getTier().equals("a")){
+			slot.setTier1(slot.getTier1()+1);
+		} else if (ticket.getTier().equals("b")) {
+			slot.setTier2(slot.getTier1()+1);
+		}else {
+			slot.setTier3(slot.getTier3()+1);
+		}
+		parkingSlotService.saveSlot(slot);
 	}
 
 	@Override
@@ -63,6 +72,7 @@ public class TicketServiceImpl implements TicketService {
 		ticket.setTitle(parkingSlot.getTitle());
 		ticket.setDate(parkingSlot.getDate());
 		ticket.setTier(tier);
+		parkingSlotService.saveSlot(parkingSlot);
 		return ticketDao.saveTicket(ticket);
 	}
 }

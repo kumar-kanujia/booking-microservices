@@ -36,7 +36,7 @@ public class BookingResource {
     public List<ParkingSlot> viewByTitleAndDate(@RequestParam String title, @RequestParam String date) throws UnavailableSlotException {
         return parkingSlotService.findParkingSlotByTitleAndDate(title, date);
     }
-
+/*
     @GetMapping(value="view", params = {"date", "time"})
     public ParkingSlot viewByDateAndTime(@RequestParam String date, @RequestParam String time) throws UnavailableSlotException {
         return parkingSlotService.findParkingSlotByDateAndTime(date, time);
@@ -45,6 +45,8 @@ public class BookingResource {
     public List<ParkingSlot> viewByDate(@RequestParam String date) throws UnavailableSlotException {
         return parkingSlotService.findParkingSlotByDate(date);
     }
+
+ */
 
     @PostMapping("book/{slotId}/{section}/{carNumber}")
     public ResponseEntity<Ticket> bookTicket(@PathVariable String slotId, @PathVariable String section, @PathVariable String carNumber, HttpServletRequest servletRequest) throws UnavailableSlotException{

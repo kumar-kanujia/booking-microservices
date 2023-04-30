@@ -2,6 +2,7 @@ package org.jfs.drivein.bookingservice.resource;
 
 import lombok.AllArgsConstructor;
 import org.jfs.drivein.bookingservice.exception.TicketNotFoundException;
+import org.jfs.drivein.bookingservice.exception.UnavailableSlotException;
 import org.jfs.drivein.bookingservice.model.Ticket;
 import org.jfs.drivein.bookingservice.service.TicketService;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class TicketResource {
     }
 
     @DeleteMapping("cancel/ticket/{ticketId}")
-    public ResponseEntity<?> cancelTicket(@PathVariable String ticketId) throws TicketNotFoundException{
+    public ResponseEntity<?> cancelTicket(@PathVariable String ticketId) throws TicketNotFoundException, UnavailableSlotException {
         ticketService.cancelTicket(ticketId);
         return ResponseEntity.noContent().build();
     }

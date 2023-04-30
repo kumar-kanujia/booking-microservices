@@ -10,7 +10,7 @@ author kumar-kanujia
 
 public interface TicketService {
 
-	void cancelTicket(String id) throws TicketNotFoundException;
+	void cancelTicket(String id) throws TicketNotFoundException, UnavailableSlotException;
 
 	Ticket viewTicket(String id) throws TicketNotFoundException;
 
