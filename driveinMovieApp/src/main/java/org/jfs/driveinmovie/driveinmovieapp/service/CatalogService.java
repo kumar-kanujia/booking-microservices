@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -31,12 +32,12 @@ public class CatalogService {
 
 
 
-    public Movie findMovieByTitle(String title) throws MovieTitleNotFoundException {
+    public List<Movie> findMovieByTitle(String title) throws MovieTitleNotFoundException {
         ResponseEntity<Movie> movieResponseEntity = catalogResource.findMovieByTitle(title);
         if (movieResponseEntity.getStatusCode().equals(HttpStatus.NOT_FOUND)){
             throw new MovieTitleNotFoundException("");
         }
-        return movieResponseEntity.getBody();
+        return List.of(Objects.requireNonNull(movieResponseEntity.getBody()));
     }
 
 
