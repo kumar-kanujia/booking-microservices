@@ -1,6 +1,7 @@
 package org.jfs.drivein.bookingservice.service;
 
-import lombok.AllArgsConstructor;
+import java.util.Optional;
+
 import org.jfs.drivein.bookingservice.client.ScheduleClient;
 import org.jfs.drivein.bookingservice.dao.TicketDao;
 import org.jfs.drivein.bookingservice.exception.TicketNotFoundException;
@@ -9,7 +10,7 @@ import org.jfs.drivein.bookingservice.model.ParkingSlot;
 import org.jfs.drivein.bookingservice.model.Ticket;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import lombok.AllArgsConstructor;
 
 /*
 author kumar-kanujia
@@ -40,7 +41,7 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public Ticket bookTicket(String slotId, String carNumber, String tier) throws UnavailableSlotException {
-		ParkingSlot parkingSlot = parkingSlotService.findParkingSlotById(slotId);
+		ParkingSlot parkingSlot = parkingSlotService.findParkingSlotById(slotId).get(0);
 		Ticket ticket = new Ticket();
 		ticket.setSlotTime(parkingSlot.getSlotTime());
 		if (tier.equals("a") && parkingSlot.getTier1()>0){

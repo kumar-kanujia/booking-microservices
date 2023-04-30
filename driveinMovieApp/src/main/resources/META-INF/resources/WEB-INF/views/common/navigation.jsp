@@ -10,7 +10,7 @@
                     <a class="nav-link" href="${pageContext.request.contextPath}/catalog">Movies</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/searchSlot?title= >Book</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/searchSlot?title=">Book</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="${pageContext.request.contextPath}/viewTicket">Ticket</a>
