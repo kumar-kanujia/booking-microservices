@@ -14,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ScheduleMovie {
 
-    private String id;
+    private String slotId;
     @NotBlank(message = "")
     private String title;
     @Min(value = 1000 , message = "")

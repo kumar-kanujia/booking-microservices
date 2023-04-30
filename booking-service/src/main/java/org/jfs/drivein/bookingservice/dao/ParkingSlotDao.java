@@ -11,7 +11,7 @@ author mujain
 
 public interface ParkingSlotDao {
 
-	void saveParkingSlot(ParkingSlot parkingSlot);
+	ParkingSlot saveParkingSlot(ParkingSlot parkingSlot);
 
 	void deleteParkingSlot(ParkingSlot parkingSlot);
 

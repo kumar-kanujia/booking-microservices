@@ -40,5 +40,13 @@ public class ParkingSlot {
 	@Max(value = 20 , message = "")
     private int tier3;
 
+	public ParkingSlot(String title, String date, String slotTime, int tier1, int tier2, int tier3) {
+		this.title = title;
+		this.date = date;
+		this.slotTime = slotTime;
+		this.tier1 = tier1;
+		this.tier2 = tier2;
+		this.tier3 = tier3;
+	}
 }
 

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 public interface BookingClient {
 
 	@PostMapping("slot/create")
-	void createSlot(@RequestBody ParkingSlot parkingSlot);
+	ParkingSlot createSlot(@RequestBody ParkingSlot parkingSlot);
 
 	@PutMapping("slot/update/{id}/{title}")
 	void updateSlot(@PathVariable String id, @PathVariable String title);
