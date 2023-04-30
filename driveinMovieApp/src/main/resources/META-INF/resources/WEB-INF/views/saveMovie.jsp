@@ -4,6 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8 col-sm-10 col-12">
             <form:form class="border p-3" method="post" modelAttribute="movie" action="${pageContext.request.contextPath}/saveMovie" >
+                    <form:hidden path="id"/>
                 <div class="mb-3">
                     <fieldset>
                     <form:label path="title" for="title" class="form-label">Title</form:label>

@@ -16,13 +16,15 @@ public class CatalogService {
 
     private  final CatalogResource catalogResource;
 
+    public void save(Movie movie) {
+        catalogResource.save(movie);
+    }
+
     public List<Movie> listAllMovie(){
         return catalogResource.getAllMovie();
     }
 
-    public void save(Movie movie) {
-        catalogResource.save(movie);
-    }
+
 
     public Movie findMovieByTitle(String title) throws MovieTitleNotFoundException {
         ResponseEntity<Movie> movieResponseEntity = catalogResource.findMovieByTitle(title);
