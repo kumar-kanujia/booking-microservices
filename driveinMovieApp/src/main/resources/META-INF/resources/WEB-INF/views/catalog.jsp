@@ -26,6 +26,7 @@
                         <td style="vertical-align: middle;"><a href="${pageContext.request.contextPath}/searchSlot?title=${movie.title}" class="btn btn-outline-primary">Book</a></td>
                     </tr>
                 </c:forEach>
+                <p class="text-danger text-center"><strong>${error}</strong></p>
                 </tbody>
             </table>
         </div>

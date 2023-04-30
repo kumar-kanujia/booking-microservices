@@ -29,6 +29,7 @@
                         <td style="vertical-align: middle;"><a href="${pageContext.request.contextPath}/deleteMovie?title=${movie.title}" class="btn btn-outline-danger" methods="">Delete</a></td>
                     </tr>
                 </c:forEach>
+                <p class="text-danger text-center"><strong>${error}</strong></p>
                 </tbody>
             </table>
         </div>

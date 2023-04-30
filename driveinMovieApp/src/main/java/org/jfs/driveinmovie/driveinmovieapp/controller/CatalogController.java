@@ -1,6 +1,8 @@
 package org.jfs.driveinmovie.driveinmovieapp.controller;
 
-import jakarta.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jfs.driveinmovie.driveinmovieapp.exception.MovieTitleNotFoundException;
 import org.jfs.driveinmovie.driveinmovieapp.model.Movie;
 import org.jfs.driveinmovie.driveinmovieapp.service.CatalogService;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @Controller
@@ -22,7 +25,7 @@ public class CatalogController {
 
     @GetMapping("addMovie")
     public String showAddMoviePage(ModelMap modelMap){
-        //To show page for adding th movie
+		// To show page for adding the movie
         modelMap.put("movie", new Movie());
         return "addMovie";
     }
@@ -52,7 +55,11 @@ public class CatalogController {
 
     @GetMapping("catalog")
     public String showCatalog(ModelMap modelMap){
-        modelMap.put("catalogList", catalogService.listAllMovie());
+        List<Movie> listAllMovie = catalogService.listAllMovie();
+		if (listAllMovie.size() == 0) {
+			modelMap.put("error", "Backend Sever error check Catalog Service");
+		}
+		modelMap.put("catalogList", listAllMovie);
         return "catalog";
     }
 
@@ -69,8 +76,15 @@ public class CatalogController {
     }
 
     @PostMapping("searchMovie")
-    public String searchMovie(@RequestParam String title, ModelMap modelMap) throws MovieTitleNotFoundException {
-        modelMap.put("catalogList", catalogService.findMovieByTitle(title));
+	public String searchMovie(@RequestParam String title, ModelMap modelMap) {
+		List<Movie> movies;
+		try {
+			movies = catalogService.findMovieByTitle(title);
+		} catch (Exception exception) {
+			movies = new ArrayList<>();
+			modelMap.put("error", "Not Found");
+		}
+		modelMap.put("catalogList", movies);
         return "catalog";
     }
 }

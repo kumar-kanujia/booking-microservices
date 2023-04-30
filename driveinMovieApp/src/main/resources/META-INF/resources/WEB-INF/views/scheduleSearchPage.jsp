@@ -10,7 +10,7 @@
         </div>
         <div class="mb-3">
           <label for="date" class="form-label">Date (Upcoming)</label>
-          <input type="date" class="form-control" id="date" name="date">
+          <input type="date" class="form-control" id="date" name="date" required="required">
         </div>
         <div class="text-center m-md-5">
           <input class="btn btn-outline-success " type="submit" value="Search">

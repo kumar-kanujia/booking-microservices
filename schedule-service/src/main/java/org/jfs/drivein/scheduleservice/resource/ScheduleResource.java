@@ -1,22 +1,15 @@
 package org.jfs.drivein.scheduleservice.resource;
 
-import java.net.URI;
-
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.jfs.drivein.scheduleservice.exception.InvalidScheduleDateException;
 import org.jfs.drivein.scheduleservice.model.Schedule;
 import org.jfs.drivein.scheduleservice.service.ScheduleCrudService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.validation.Valid;
+import java.net.URI;
 
 @RestController
 public class ScheduleResource {
@@ -52,10 +45,9 @@ public class ScheduleResource {
 		return ResponseEntity.noContent().build();
 	}
 
-	@GetMapping("price/{id}/{tier}/{slotTime}")
-	public double getPrice(@PathVariable String id, @PathVariable String tier, @PathVariable String slotTime)
+	@GetMapping("price/{date}/{tier}/{slotTime}")
+	public double getPrice(@PathVariable String date, @PathVariable String tier, @PathVariable String slotTime)
 			throws InvalidScheduleDateException {
-
-		return crudService.getPrice(id, tier, slotTime);
+		return crudService.getPrice(date, tier, slotTime);
 	}
 }

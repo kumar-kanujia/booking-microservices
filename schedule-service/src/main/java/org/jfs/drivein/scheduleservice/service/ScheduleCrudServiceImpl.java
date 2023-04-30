@@ -1,7 +1,6 @@
 package org.jfs.drivein.scheduleservice.service;
 
-import java.util.Optional;
-
+import lombok.AllArgsConstructor;
 import org.jfs.drivein.scheduleservice.client.BookingClient;
 import org.jfs.drivein.scheduleservice.config.PropertiesConfig;
 import org.jfs.drivein.scheduleservice.dao.ScheduleDao;
@@ -10,7 +9,7 @@ import org.jfs.drivein.scheduleservice.model.ParkingSlot;
 import org.jfs.drivein.scheduleservice.model.Schedule;
 import org.springframework.stereotype.Service;
 
-import lombok.AllArgsConstructor;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -75,12 +74,12 @@ public class ScheduleCrudServiceImpl implements ScheduleCrudService {
 	}
 
 	@Override
-	public double getPrice(String id, String tier, String slotTime) throws InvalidScheduleDateException {
+	public double getPrice(String date, String tier, String slotTime) throws InvalidScheduleDateException {
 		// TODO Auto-generated method stub
-		Optional<Schedule> scheduleOptional = scheduleDao.viewScheduleById(id);
+		Optional<Schedule> scheduleOptional = scheduleDao.viewSchedule(date);
 		double price;
 		if (scheduleOptional.isEmpty()) {
-			throw new InvalidScheduleDateException("Please enter valid ID");
+			throw new InvalidScheduleDateException("Please enter valid Date");
 		}
 		Schedule schedule = scheduleOptional.get();
 		if (tier.equals("a")) {

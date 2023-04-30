@@ -1,6 +1,9 @@
 package org.jfs.driveinmovie.driveinmovieapp.service;
 
-import lombok.AllArgsConstructor;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 import org.jfs.driveinmovie.driveinmovieapp.exception.MovieTitleNotFoundException;
 import org.jfs.driveinmovie.driveinmovieapp.model.Movie;
 import org.jfs.driveinmovie.driveinmovieapp.resource.CatalogResource;
@@ -8,8 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Objects;
+import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
@@ -22,7 +24,13 @@ public class CatalogService {
     }
 
     public List<Movie> listAllMovie(){
-        return catalogResource.getAllMovie();
+		List<Movie> list;
+		try {
+			list = catalogResource.getAllMovie();
+		} catch (Exception e) {
+			list = new ArrayList<>();
+		}
+		return list;
     }
 
     public void update(Movie movie) throws MovieTitleNotFoundException {

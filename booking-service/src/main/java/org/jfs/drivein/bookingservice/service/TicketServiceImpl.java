@@ -27,9 +27,18 @@ public class TicketServiceImpl implements TicketService {
 	private final ScheduleClient scheduleClient;
 
 	@Override
-	public void cancelTicket(String id) throws TicketNotFoundException {
-		ticketDao.viewTicket(id).orElseThrow(() -> new TicketNotFoundException(""));
+	public void cancelTicket(String id) throws TicketNotFoundException, UnavailableSlotException {
+		Ticket ticket = ticketDao.viewTicket(id).orElseThrow(() -> new TicketNotFoundException(""));
 		ticketDao.cancelTicket(id);
+		ParkingSlot slot = parkingSlotService.findParkingSlotByDateAndTime(ticket.getDate(), ticket.getSlotTime());
+		if (ticket.getTier().equals("a")){
+			slot.setTier1(slot.getTier1()+1);
+		} else if (ticket.getTier().equals("b")) {
+			slot.setTier2(slot.getTier1()+1);
+		}else {
+			slot.setTier3(slot.getTier3()+1);
+		}
+		parkingSlotService.saveSlot(slot);
 	}
 
 	@Override
@@ -45,15 +54,15 @@ public class TicketServiceImpl implements TicketService {
 		Ticket ticket = new Ticket();
 		ticket.setSlotTime(parkingSlot.getSlotTime());
 		if (tier.equals("a") && parkingSlot.getTier1()>0){
-			ticket.setPrice(scheduleClient.getPrice(parkingSlot.getId(), tier, ticket.getSlotTime()));
+			ticket.setPrice(scheduleClient.getPrice(parkingSlot.getDate(), tier, ticket.getSlotTime()));
 			ticket.setSeatNo(parkingSlot.getTier1());
 			parkingSlot.setTier1(parkingSlot.getTier1()-1);
 		} else if (tier.equals("b") && parkingSlot.getTier2()>0) {
-			ticket.setPrice(scheduleClient.getPrice(parkingSlot.getId(), tier, ticket.getSlotTime()));
+			ticket.setPrice(scheduleClient.getPrice(parkingSlot.getDate(), tier, ticket.getSlotTime()));
 			ticket.setSeatNo(parkingSlot.getTier2());
 			parkingSlot.setTier2(parkingSlot.getTier2()-1);
 		}else if (tier.equals("c") && parkingSlot.getTier3()>0) {
-			ticket.setPrice(scheduleClient.getPrice(parkingSlot.getId(), tier, ticket.getSlotTime()));
+			ticket.setPrice(scheduleClient.getPrice(parkingSlot.getDate(), tier, ticket.getSlotTime()));
 			ticket.setSeatNo(parkingSlot.getTier3());
 			parkingSlot.setTier3(parkingSlot.getTier3()-1);
 		}else{
@@ -63,6 +72,7 @@ public class TicketServiceImpl implements TicketService {
 		ticket.setTitle(parkingSlot.getTitle());
 		ticket.setDate(parkingSlot.getDate());
 		ticket.setTier(tier);
+		parkingSlotService.saveSlot(parkingSlot);
 		return ticketDao.saveTicket(ticket);
 	}
 }
