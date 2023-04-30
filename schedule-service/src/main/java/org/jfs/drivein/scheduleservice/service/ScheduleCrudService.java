@@ -13,5 +13,5 @@ public interface ScheduleCrudService {
 
 	Schedule viewSchedule(String date) throws InvalidScheduleDateException;
 
-	double getPrice(String id, String tier, String slotTime) throws InvalidScheduleDateException;
+	double getPrice(String date, String tier, String slotTime) throws InvalidScheduleDateException;
 }
