@@ -34,7 +34,7 @@ public class ScheduleCrudServiceImpl implements ScheduleCrudService {
 	public void addSchedule(Schedule schedule) {
 		//Working
 		ParkingSlot parkingSlot1 = new ParkingSlot(schedule.getSlot1().getTitle(), schedule.getDate(), propertiesConfig.getSlotTimeA(), 20, 20, 20);
-		ParkingSlot parkingSlot2 =	 new ParkingSlot(schedule.getSlot2().getTitle(), schedule.getDate(), propertiesConfig.getSlotTimeB(), 20, 20, 20);
+		ParkingSlot parkingSlot2 = new ParkingSlot(schedule.getSlot2().getTitle(), schedule.getDate(), propertiesConfig.getSlotTimeB(), 20, 20, 20);
 		ParkingSlot parkingSlot3 = new ParkingSlot(schedule.getSlot3().getTitle(), schedule.getDate(), propertiesConfig.getSlotTimeC(), 20, 20, 20);
 		schedule.getSlot1().setSlotId(bookingClient.createSlot(parkingSlot1).getId());
 		schedule.getSlot2().setSlotId(bookingClient.createSlot(parkingSlot2).getId());
