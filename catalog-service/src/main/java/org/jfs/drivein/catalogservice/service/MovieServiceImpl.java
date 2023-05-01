@@ -13,8 +13,24 @@ public class MovieServiceImpl implements MovieService{
 
     private final MovieDao movieDao;
 
+    @Override
+    public List<Movie> viewAllMovie() {
+        return movieDao.viewAllMovie();
+    }
+
+    
+
     public MovieServiceImpl(MovieDao movieDao) {
         this.movieDao = movieDao;
+    }
+
+    @Override
+    public Movie viewMovie(String title) throws MovieTitleNotFoundException{
+        Optional<Movie> movieOptional =  movieDao.viewMovie(title);
+        if(movieOptional.isEmpty()) {
+            throw new MovieTitleNotFoundException("");
+        }
+        return movieOptional.get();
     }
 
     @Override
@@ -32,22 +48,12 @@ public class MovieServiceImpl implements MovieService{
         return movieDao.saveMovie(movie);
     }
 
-    @Override
-    public Movie viewMovie(String title) throws MovieTitleNotFoundException{
-    	Optional<Movie> movieOptional =  movieDao.viewMovie(title);
-    	if(movieOptional.isEmpty()) {
-    		throw new MovieTitleNotFoundException("");
-    	}
-        return movieOptional.get();
-    }
+
 
     @Override
     public void deleteMovie(String title){
     	movieDao.deleteMovie(title);
     }
 
-    @Override
-    public List<Movie> viewAllMovie() {
-        return movieDao.viewAllMovie();
-    }
+
 }
