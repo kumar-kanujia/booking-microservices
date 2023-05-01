@@ -11,25 +11,30 @@
                 <div class="mb-3">
                     <label for="date" class="form-label">Date (Upcoming)</label>
                     <form:input path="date" type="date" class="form-control" id="date" name="date" readonly="false" required="required"/>
+                    <form:errors path = "date" cssClass="text-warning"/>
                 </div>
                 <div class="mb-3">
                     <h4>3AM</h4>
                     <div class="row">
                         <div class="col">
                             <label for="title1" class="form-label">Title</label>
-                            <form:input path="slot1.title" type="text" class="form-control" id="title1" name="title1" readonly="false"/>
+                            <form:input path="slot1.title" type="text" class="form-control" id="title1" name="title1" readonly="false" required="required"/>
+                            <form:errors path = "slot1.title" cssClass="text-warning"/>
                         </div>
                         <div class="col">
                             <label for="tier1" class="form-label">Tier 1 Price</label>
-                            <form:input path="slot1.tier1Price" type="number" class="form-control" id="tier1" name="tier1" min="0" readonly="false"/>
+                            <form:input path="slot1.tier1Price" type="number" class="form-control" id="tier1" name="tier1" min="0" readonly="false" required="required"/>
+                            <form:errors path = "slot1.tier1Price" cssClass="text-warning"/>
                         </div>
                         <div class="col">
                             <label for="tier2" class="form-label">Tier 2 Price</label>
-                            <form:input path="slot1.tier2Price" type="number" class="form-control" id="tier2" name="tier1" min="0" readonly="false"/>
+                            <form:input path="slot1.tier2Price" type="number" class="form-control" id="tier2" name="tier1" min="0" readonly="false" required="required"/>
+                            <form:errors path = "slot1.tier2Price" cssClass="text-warning"/>
                         </div>
                         <div class="col">
                             <label for="tier3" class="form-label">Tier 3 Price</label>
-                            <form:input path="slot1.tier3Price" type="number" class="form-control" id="tier3" name="tier1" min="0" readonly="false"/>
+                            <form:input path="slot1.tier3Price" type="number" class="form-control" id="tier3" name="tier1" min="0" readonly="false" required="required"/>
+                            <form:errors path = "slot1.tier3Price" cssClass="text-warning"/>
                         </div>
                     </div>
                 </div>
@@ -38,19 +43,23 @@
                     <div class="row">
                         <div class="col">
                             <label for="title1" class="form-label">Title</label>
-                            <form:input path="slot2.title" type="text" class="form-control" id="title1" name="title1" readonly="false"/>
+                            <form:input path="slot2.title" type="text" class="form-control" id="title1" name="title1" readonly="false" required="required"/>
+                            <form:errors path = "slot2.title" cssClass="text-warning"/>
                         </div>
                         <div class="col">
                             <label for="tier1" class="form-label">Tier 1 Price</label>
-                            <form:input path="slot2.tier1Price" type="number" class="form-control" id="tier1" name="tier1" min="0" readonly="false"/>
+                            <form:input path="slot2.tier1Price" type="number" class="form-control" id="tier1" name="tier1" min="0" readonly="false" required="required"/>
+                            <form:errors path = "slot2.tier1Price" cssClass="text-warning"/>
                         </div>
                         <div class="col">
                             <label for="tier2" class="form-label">Tier 2 Price</label>
-                            <form:input path="slot2.tier2Price" type="number" class="form-control" id="tier2" name="tier1" min="0" readonly="false"/>
+                            <form:input path="slot2.tier2Price" type="number" class="form-control" id="tier2" name="tier1" min="0" readonly="false" required="required"/>
+                            <form:errors path = "slot2.tier2Price" cssClass="text-warning"/>
                         </div>
                         <div class="col">
                             <label for="tier3" class="form-label">Tier 3 Price</label>
-                            <form:input path="slot2.tier3Price" type="number" class="form-control" id="tier3" name="tier1" min="0" readonly="false"/>
+                            <form:input path="slot2.tier3Price" type="number" class="form-control" id="tier3" name="tier1" min="0" readonly="false" required="required"/>
+                            <form:errors path = "slot2.tier3Price" cssClass="text-warning"/>
                         </div>
                     </div>
                 </div>
@@ -59,19 +68,23 @@
                     <div class="row">
                         <div class="col">
                             <label for="title1" class="form-label">Title</label>
-                            <form:input path="slot3.title" type="text" class="form-control" id="title1" name="title1" readonly="false"/>
+                            <form:input path="slot3.title" type="text" class="form-control" id="title1" name="title1" readonly="false" required="required"/>
+                            <form:errors path = "slot3.title" cssClass="text-warning"/>
                         </div>
                         <div class="col">
                             <label for="tier1" class="form-label">Tier 1 Price</label>
-                            <form:input path="slot3.tier1Price" type="number" class="form-control" id="tier1" name="tier1" min="0" readonly="false"/>
+                            <form:input path="slot3.tier1Price" type="number" class="form-control" id="tier1" name="tier1" min="0" readonly="false" required="required"/>
+                            <form:errors path = "slot3.tier1Price" cssClass="text-warning"/>
                         </div>
                         <div class="col">
                             <label for="tier2" class="form-label">Tier 2 Price</label>
-                            <form:input path="slot3.tier2Price" type="number" class="form-control" id="tier2" name="tier1" min="0" readonly="false"/>
+                            <form:input path="slot3.tier2Price" type="number" class="form-control" id="tier2" name="tier1" min="0" readonly="false" required="required"/>
+                            <form:errors path = "slot3.tier2Price" cssClass="text-warning"/>
                         </div>
                         <div class="col">
                             <label for="tier3" class="form-label">Tier 3 Price</label>
-                            <form:input path="slot3.tier3Price" type="number" class="form-control" id="tier3" name="tier1" min="0" readonly="false"/>
+                            <form:input path="slot3.tier3Price" type="number" class="form-control" id="tier3" name="tier1" min="0" readonly="false" required="required"/>
+                            <form:errors path = "slot3.tier3Price" cssClass="text-warning"/>
                         </div>
                     </div>
                 </div>

@@ -18,7 +18,7 @@ public class Schedule {
     private String id;
     @Pattern(regexp="^\\d{4}-\\d{2}-\\d{2}$", message = "Date must be in the format yyyy-MM-dd")
     @NotBlank(message = "")
-    @ForwardDateValidation
+    @ForwardDateValidation(message = "Date should be a future date")
     private String date;
     @Valid
     private ScheduleMovie slot1;

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import feign.FeignException;
+
 @Controller
 @AllArgsConstructor
 public class BookingController {
@@ -29,8 +31,13 @@ public class BookingController {
 
     @GetMapping("cancelTicket")
     public String deleteTicket(@RequestParam String id, ModelMap modelMap){
-        bookingService.cancelTicket(id);
-        modelMap.put("msg", "Ticket id " + id + " is canceled");
+        try {
+        	bookingService.cancelTicket(id);
+        	modelMap.put("msg", "Ticket id " + id + " is canceled");
+        }
+        catch(FeignException e) {
+        	modelMap.put("msg", "Your ticket is already cancelled");
+        }
         return "ticket";
     }
 
@@ -54,8 +61,15 @@ public class BookingController {
 
     @PostMapping("searchSlot")
     public String parkingSlotPageByTitle(@RequestParam String title, ModelMap modelMap){
-        modelMap.put("listOfSlots", bookingService.getParkingSlotByTitle(title));
-        modelMap.put("title", title);
+    	try {
+    		modelMap.put("listOfSlots", bookingService.getParkingSlotByTitle(title));
+            modelMap.put("title", title);
+    	}
+    	catch(FeignException e) {
+    		modelMap.put("error" , "Slot not found for the movie");
+    		return "titleSearch";
+    	}
+        
         return "slotPage";
     }
 

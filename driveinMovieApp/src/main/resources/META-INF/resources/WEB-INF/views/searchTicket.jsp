@@ -4,7 +4,7 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
     <div class="card p-4">
-        <h1 class="mb-4">Booking Search</h1>
+        <h1 class="mb-4">Show Booking</h1>
         <form action="${pageContext.request.contextPath}/viewTicket" method="post">
             <div class="form-group ui-autocomplete">
                 <label for="id" class="text-center m-md-1">Booking ID:</label>

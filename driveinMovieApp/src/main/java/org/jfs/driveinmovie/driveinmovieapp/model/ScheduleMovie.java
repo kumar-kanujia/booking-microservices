@@ -15,15 +15,15 @@ import lombok.Setter;
 public class ScheduleMovie {
 
     private String slotId;
-    @NotBlank(message = "")
+    @NotBlank(message = "Title cannot be blank")
     private String title;
-    @Min(value = 1000 , message = "")
-    @Max(value = 15000 , message = "")
+    @Min(value = 1000 , message = "Min value should be 1000")
+    @Max(value = 15000 , message = "Max value should be 15000")
     private double tier1Price;
-    @Min(value = 1000 , message = "")
-    @Max(value = 15000 , message = "")
+    @Min(value = 1000 , message = "Min value should be 1000")
+    @Max(value = 15000 , message = "Max value should be 15000")
     private double tier2Price;
-    @Min(value = 1000 , message = "")
-    @Max(value = 15000 , message = "")
+    @Min(value = 1000 , message = "Min value should be 1000")
+    @Max(value = 15000 , message = "Max value should be 15000")
     private double tier3Price;
 }

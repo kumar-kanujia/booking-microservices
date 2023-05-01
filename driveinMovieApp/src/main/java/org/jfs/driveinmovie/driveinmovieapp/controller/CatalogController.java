@@ -1,5 +1,6 @@
 package org.jfs.driveinmovie.driveinmovieapp.controller;
 
+import feign.FeignException;
 import feign.RetryableException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -71,11 +72,11 @@ public class CatalogController {
 
 
     @PostMapping("searchMovie")
-    public String searchMovie(@RequestParam String title, ModelMap modelMap) {
+    public String searchMovie(@RequestParam String title, ModelMap modelMap) throws MovieTitleNotFoundException {
         List<Movie> movies;
         try {
             movies = catalogService.findMovieByTitle(title);
-        } catch (MovieTitleNotFoundException exception) {
+        } catch (FeignException exception) {
             movies = new ArrayList<>();
             modelMap.put("error", "Not Found");
         }
