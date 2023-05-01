@@ -54,6 +54,25 @@ public class ScheduleCrudServiceImplTest {
     }
 
     @Test
+    void testViewSchedule() throws InvalidScheduleDateException {
+
+        when(scheduleDao.viewSchedule(date)).thenReturn(Optional.of(new Schedule()));
+
+        scheduleCrudServiceImpl.viewSchedule(date);
+
+        verify(scheduleDao).viewSchedule(date);
+    }
+
+    @Test
+    void testViewScheduleInvalidDate() {
+
+        when(scheduleDao.viewSchedule(date)).thenReturn(Optional.empty());
+
+        assertThrows(InvalidScheduleDateException.class,
+                () -> scheduleCrudServiceImpl.viewSchedule(date));
+    }
+
+    @Test
     public void testAddSchedule() {
         scheduleCrudServiceImpl.addSchedule(schedule);
 
@@ -70,7 +89,7 @@ public class ScheduleCrudServiceImplTest {
     @Test
     public void testUpdateSchedule() throws InvalidScheduleDateException {
 
-        when(scheduleDao.viewSchedule(date)).thenReturn(Optional.of(new Schedule()));
+        when(scheduleDao.viewSchedule(date)).thenReturn(Optional.of(schedule));
 
         scheduleCrudServiceImpl.updateSchedule(date, schedule);
 
@@ -114,36 +133,16 @@ public class ScheduleCrudServiceImplTest {
     }
 
     @Test
-    void testViewSchedule() throws InvalidScheduleDateException {
-
-        when(scheduleDao.viewSchedule(date)).thenReturn(Optional.of(new Schedule()));
-
-        scheduleCrudServiceImpl.viewSchedule(date);
-
-        verify(scheduleDao).viewSchedule(date);
-    }
-
-    @Test
-    void testViewScheduleInvalidDate() {
-
-        when(scheduleDao.viewSchedule(date)).thenReturn(Optional.empty());
-
-        assertThrows(InvalidScheduleDateException.class,
-                () -> scheduleCrudServiceImpl.viewSchedule(date));
-    }
-
-    @Test
     void testGetPriceTierA() throws InvalidScheduleDateException {
-        String id = "101";
         String tier = "a";
 
-        when(scheduleDao.viewScheduleById(id)).thenReturn(Optional.of(schedule));
+        when(scheduleDao.viewSchedule(date)).thenReturn(Optional.of(schedule));
         when(propertiesConfig.getSlotTimeA()).thenReturn("12:00 AM");
         when(propertiesConfig.getSlotTimeB()).thenReturn("03:00 AM");
 
-        double price1 = scheduleCrudServiceImpl.getPrice(id , tier , "12:00 AM");
-        double price2 = scheduleCrudServiceImpl.getPrice(id , tier , "03:00 AM");
-        double price3 = scheduleCrudServiceImpl.getPrice(id , tier , "09:00 AM");
+        double price1 = scheduleCrudServiceImpl.getPrice(date , tier , "12:00 AM");
+        double price2 = scheduleCrudServiceImpl.getPrice(date , tier , "03:00 AM");
+        double price3 = scheduleCrudServiceImpl.getPrice(date , tier , "09:00 AM");
 
         assertEquals(14000 , price1);
         assertEquals(15000 , price2);
@@ -152,16 +151,15 @@ public class ScheduleCrudServiceImplTest {
 
     @Test
     void testGetPriceTierB() throws InvalidScheduleDateException {
-        String id = "102";
         String tier = "b";
 
-        when(scheduleDao.viewScheduleById(id)).thenReturn(Optional.of(schedule));
+        when(scheduleDao.viewSchedule(date)).thenReturn(Optional.of(schedule));
         when(propertiesConfig.getSlotTimeA()).thenReturn("12:00 AM");
         when(propertiesConfig.getSlotTimeB()).thenReturn("03:00 AM");
 
-        double price1 = scheduleCrudServiceImpl.getPrice(id , tier , "12:00 AM");
-        double price2 = scheduleCrudServiceImpl.getPrice(id , tier , "03:00 AM");
-        double price3 = scheduleCrudServiceImpl.getPrice(id , tier , "09:00 AM");
+        double price1 = scheduleCrudServiceImpl.getPrice(date , tier , "12:00 AM");
+        double price2 = scheduleCrudServiceImpl.getPrice(date , tier , "03:00 AM");
+        double price3 = scheduleCrudServiceImpl.getPrice(date , tier , "09:00 AM");
 
         assertEquals(10000 , price1);
         assertEquals(11000 , price2);
@@ -170,16 +168,15 @@ public class ScheduleCrudServiceImplTest {
 
     @Test
     void testGetPriceTierC() throws InvalidScheduleDateException {
-        String id = "103";
         String tier = "c";
 
-        when(scheduleDao.viewScheduleById(id)).thenReturn(Optional.of(schedule));
+        when(scheduleDao.viewSchedule(date)).thenReturn(Optional.of(schedule));
         when(propertiesConfig.getSlotTimeA()).thenReturn("12:00 AM");
         when(propertiesConfig.getSlotTimeB()).thenReturn("03:00 AM");
 
-        double price1 = scheduleCrudServiceImpl.getPrice(id , tier , "12:00 AM");
-        double price2 = scheduleCrudServiceImpl.getPrice(id , tier , "03:00 AM");
-        double price3 = scheduleCrudServiceImpl.getPrice(id , tier , "09:00 AM");
+        double price1 = scheduleCrudServiceImpl.getPrice(date , tier , "12:00 AM");
+        double price2 = scheduleCrudServiceImpl.getPrice(date , tier , "03:00 AM");
+        double price3 = scheduleCrudServiceImpl.getPrice(date , tier , "09:00 AM");
 
         assertEquals(5000 , price1);
         assertEquals(2000 , price2);
@@ -189,12 +186,11 @@ public class ScheduleCrudServiceImplTest {
     @Test
     void testGetPriceInvalidDate(){
 
-        String id = "101";
         String tier = "a";
 
-        when(scheduleDao.viewScheduleById(id)).thenReturn(Optional.empty());
+        when(scheduleDao.viewSchedule(date)).thenReturn(Optional.empty());
 
         assertThrows(InvalidScheduleDateException.class,
-                () -> scheduleCrudServiceImpl.getPrice(id , tier , propertiesConfig.getSlotTimeA()));
+                () -> scheduleCrudServiceImpl.getPrice(date , tier , propertiesConfig.getSlotTimeA()));
     }
 }
