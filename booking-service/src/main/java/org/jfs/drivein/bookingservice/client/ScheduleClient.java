@@ -4,7 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(value = "schedule-service", url = "http://localhost:8000/")
+@FeignClient(value = "schedule-service")
 public interface ScheduleClient {
 
 	@GetMapping("price/{date}/{tier}/{slotTime}")
