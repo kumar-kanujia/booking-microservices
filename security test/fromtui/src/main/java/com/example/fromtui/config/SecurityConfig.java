@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.web.SecurityFilterChain;
 
 
+
 @Configuration
 public class SecurityConfig {
 
@@ -15,7 +16,7 @@ public class SecurityConfig {
     SecurityFilterChain securityChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests()
-                .requestMatchers("/hello").authenticated()
+				.requestMatchers("/admin", "/hello").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .oauth2Login(Customizer.withDefaults());
