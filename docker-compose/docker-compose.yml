@@ -1,0 +1,174 @@
+version: "3.8"
+
+services:
+
+  mongodb:
+    image: mongo:latest
+    mem_limit: 700m
+    ports:
+      - "27017:27017"
+    networks:
+      - movie-app-network
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - movie-app-network
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=aman
+      - GF_SECURITY_ADMIN_PASSWORD=sys
+    networks:
+      - movie-app-network
+    depends_on:
+      - prometheus
+
+  zipkin:
+    image: openzipkin/zipkin
+    mem_limit: 700m
+    ports:
+      - "9411:9411"
+    networks:
+     - movie-app-network
+    restart: always
+
+  
+  configserver:
+    image: kumarkanujia/config-server:0.0.2
+    mem_limit: 700m
+    ports:
+      - "8032:8032"
+    networks:
+      - movie-app-network
+    environment:
+      MANAGEMENT.ZIPKIN.TRACING.ENDPOINT: http://zipkin:9411/api/v2/spans
+
+  discoveryserver:
+    image: kumarkanujia/discovery-server:0.0.2
+    mem_limit: 700m
+    ports:
+      - "8762:8762"
+    networks:
+      - movie-app-network
+    depends_on:
+      - configserver
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 20s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING.PROFILES.ACTIVE: default
+      SPRING.CONFIG.IMPORT: configserver:http://configserver:8032/
+      MANAGEMENT.ZIPKIN.TRACING.ENDPOINT: http://zipkin:9411/api/v2/spans
+
+  catalog:
+    image: kumarkanujia/catalog-service:0.0.2
+    mem_limit: 700m
+    ports:
+      - "8010:8010"
+    networks:
+      - movie-app-network
+    depends_on:
+      - configserver
+      - discoveryserver
+      - mongodb
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 40s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING.PROFILES.ACTIVE: default
+      SPRING.CONFIG.IMPORT: configserver:http://configserver:8032/
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://discoveryserver:8762/eureka
+      MANAGEMENT.ZIPKIN.TRACING.ENDPOINT: http://zipkin:9411/api/v2/spans
+      SPRING.DATE.MONGODB.URI: mongodb://mongodb:27017/catalog
+
+  scheduleservice:
+    image: kumarkanujia/schedule-service:0.0.2
+    mem_limit: 700m
+    ports:
+      - "8050:8050"
+    networks:
+      - movie-app-network
+    depends_on:
+      - configserver
+      - discoveryserver
+      - mongodb
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 40s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING.PROFILES.ACTIVE: default
+      SPRING.CONFIG.IMPORT: configserver:http://configserver:8032/
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://discoveryserver:8762/eureka
+      MANAGEMENT.ZIPKIN.TRACING.ENDPOINT: http://zipkin:9411/api/v2/spans
+      SPRING.DATE.MONGODB.URI: mongodb://mongodb:27017/scheduledata
+
+  bookingservice:
+    image: kumarkanujia/booking-service:0.0.2
+    mem_limit: 700m
+    ports:
+      - "8000:8000"
+    networks:
+      - movie-app-network
+    depends_on:
+      - scheduleservice
+      - configserver
+      - discoveryserver
+      - mongodb
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 40s
+        max_attempts: 3
+        window: 120s
+    environment:
+      SPRING.PROFILES.ACTIVE: default
+      SPRING.CONFIG.IMPORT: configserver:http://configserver:8032/
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://discoveryserver:8762/eureka
+      MANAGEMENT.ZIPKIN.TRACING.ENDPOINT: http://zipkin:9411/api/v2/spans
+      SPRING.DATE.MONGODB.URI: mongodb://mongodb:27017/bookingdata
+
+  gatewayserver:
+    image: kumarkanujia/gateway-server:0.0.2
+    mem_limit: 700m
+    ports:
+      - "8072:8072"
+    networks:
+      - movie-app-network
+    depends_on:
+      - configserver
+      - discoveryserver
+      - catalog
+      - scheduleservice
+      - bookingservice
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 70s
+        max_attempts: 3
+        window: 180s
+    environment:
+      SPRING_PROFILES_ACTIVE: default
+      SPRING_CONFIG_IMPORT: configserver:http://configserver:8032/
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discoveryserver:8762/eureka/
+      MANAGEMENT.ZIPKIN.TRACING.ENDPOINT: http://zipkin:9411/api/v2/spans
+
+
+networks:
+  movie-app-network:
