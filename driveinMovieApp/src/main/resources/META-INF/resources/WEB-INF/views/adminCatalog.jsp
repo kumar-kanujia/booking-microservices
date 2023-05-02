@@ -7,9 +7,9 @@
             <table class="table w-100">
                 <thead>
                 <tr>
-                    <th class="text-center" style="width: 60%; vertical-align: middle;">Column 1</th>
-                    <th>Column 2</th>
-                    <th>Column 3</th>
+                    <th class="text-center" style="width: 60%; vertical-align: middle;">Movies</th>
+                    <th>Update</th>
+                    <th>Delete</th>
                 </tr>
                 </thead>
                 <tbody>

@@ -40,7 +40,7 @@
             </form>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/login">Login</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/xyzSecurity">login/logout</a>
                 </li>
             </ul>
         </div>

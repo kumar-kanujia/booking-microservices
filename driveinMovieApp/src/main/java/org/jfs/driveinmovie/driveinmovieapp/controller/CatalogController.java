@@ -86,7 +86,14 @@ public class CatalogController {
 
     @GetMapping(value = "adminCatalog")
     public String changeCatalog(ModelMap modelMap){
-        modelMap.put("catalogList", catalogService.listAllMovie());
+        List<Movie> movieList;
+        try{
+            movieList = catalogService.listAllMovie();
+        }catch (FeignException fex){
+            modelMap.put("error", "Backend Error No Movies Found");
+            movieList = new ArrayList<>();
+        }
+        modelMap.put("catalogList", movieList);
         return "adminCatalog";
     }
 
