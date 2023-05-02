@@ -15,7 +15,9 @@ public class SecurityConfig {
 	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 		http.csrf(AbstractHttpConfigurer::disable)
 			.authorizeHttpRequests()
-			.requestMatchers("/addMovie").authenticated()
+			.requestMatchers("/addMovie" , "/adminCatalog" , "/addSchedule" ,
+					"/viewSchedule" , "/updateSchedule" , "/deleteSchedule" ,
+					"/saveMovie" , "/updateMovie" , "/deleteMovie").authenticated()
 			.anyRequest().permitAll()
 			.and()
 			.oauth2Login(withDefaults());
