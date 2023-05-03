@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "schedule-service", url = "http://localhost:8050/")
+@FeignClient(name = "schedule-service", url = "http://localhost:8072/schedule-service/")
 public interface ScheduleResource {
 
     @PostMapping("add")
