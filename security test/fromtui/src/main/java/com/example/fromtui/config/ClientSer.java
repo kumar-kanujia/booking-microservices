@@ -3,7 +3,7 @@ package com.example.fromtui.config;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@FeignClient(name = "test", url = "http://localhost:8010/TEST")
+@FeignClient(name = "gateway", url = "http://localhost:8010/TEST")
 public interface ClientSer {
 
     @GetMapping("hello")

@@ -15,6 +15,6 @@ public class AuthController {
             authentication.setAuthenticated(false);
             return "redirect:/logout";
         }
-        return "/login";
+		return "redirect:/login";
     }
 }

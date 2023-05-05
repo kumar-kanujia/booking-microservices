@@ -2,7 +2,12 @@ package org.jfs.driveinmovie.driveinmovieapp.exception;
 
 public class ServiceDownException extends Exception{
 
-    public ServiceDownException(String message) {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public ServiceDownException(String message) {
         super(message);
     }
 }

@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>org.jfs.driveinMovie</groupId>
 	<artifactId>drive-in-movie-app</artifactId>
-	<version>1.0.1</version>
+	<version>0.0.2</version>
 	<name>driveInMovieApp</name>
 	<description>driveInMovieApp</description>
 	<properties>
@@ -109,6 +109,13 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
 					<excludes>
 						<exclude>
@@ -116,6 +123,12 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+					<image>
+						<name>
+							kumarkanujia/${project.artifactId}:${project.version}
+						</name>
+					</image>
+					<pullPolicy>IF_NOT_PRESENT</pullPolicy>
 				</configuration>
 			</plugin>
 		</plugins>

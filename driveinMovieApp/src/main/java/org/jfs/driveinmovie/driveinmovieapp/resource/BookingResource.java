@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "Booking-service", url = "http://localhost:8072/booking-service/")
+@FeignClient(name = "Booking-service", url = "${feign.client.booking-service}")
 public interface BookingResource {
 
 

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "catalog-service", url = "http://localhost:8072/catalog/")
+@FeignClient(name = "catalog-service", url = "${feign.client.catalog-service}")
 public interface CatalogResource {
 
     @GetMapping("view")
